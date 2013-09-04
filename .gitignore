@@ -1,0 +1,27 @@
+#Buit app files
+*.apk
+*.ap_
+
+#Files for dex VM
+*.dex
+
+#Class files
+*.class
+
+#generated garbage
+bin/
+gen/
+
+local.properties
+
+#Eclipse files
+.classpath
+.project
+
+proguard/
+
+#intelliJ project files -- don't think I need, but hey
+*.imi
+*.ipr
+*.iws
+.idea/
