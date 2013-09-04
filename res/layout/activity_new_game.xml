@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,42 +7,45 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".NewGame" >
-
-    <LinearLayout android:id="@+id/NameLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-        
-	    <EditText android:id="@+id/team1"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:hint="@string/team1" />
-	    <EditText android:id="@+id/team2"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:hint="@string/team2"/>
 	
-    </LinearLayout>
-    
-    <LinearLayout android:id="@+id/ScoreLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/NameLayout">
-	    
-        <TextView android:id="@+id/scoreTeam1"
-            android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:text="@string/filler" />
+    <LinearLayout android:id="@+id/Team1Layout"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:layout_width="0dp">
         
-        <TextView android:id="@+id/scoreTeam2"
-            android:layout_width="0dp"
+        <EditText android:id="@+id/team1Name"
+	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:text="@string/filler" />
-        
-    </LinearLayout>
-    
+	        android:hint="@string/team1" />
 
-</RelativeLayout>
+        <TextView android:id="@+id/team1Score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/scoreSize"
+            android:text="@string/filler" />
+
+    </LinearLayout>
+    
+    <LinearLayout android:id="@+id/Team2Layout"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:layout_width="0dp">
+        
+        <EditText android:id="@+id/team2Name"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/team2"/>
+
+        <TextView android:id="@+id/team2Score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/scoreSize"
+            android:text="@string/filler" />
+
+    </LinearLayout>
+
+</LinearLayout>

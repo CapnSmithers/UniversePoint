@@ -5,5 +5,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="buttonVerticalMargin">5dp</dimen>
     <dimen name="buttonHorizontalMargin">8dp</dimen>
+    <dimen name="scoreSize">40dp</dimen>
 
 </resources>
