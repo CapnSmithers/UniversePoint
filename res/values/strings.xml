@@ -10,5 +10,9 @@
     <string name="team1">Team 1</string>
     <string name="team2">Team 2</string>
     <string name="filler">Fill</string>
+    <string name="addPoint">Add Point</string>
+    <string name="addTurn">Add Turn</string>
+    <string name="finishGame">Finish Game</string>
+    <string name="removePoint">Remove Point</string>
 
 </resources>

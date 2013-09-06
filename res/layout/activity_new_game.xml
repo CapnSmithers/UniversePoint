@@ -1,51 +1,122 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:baselineAligned="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".NewGame" >
+	<LinearLayout 
+	    android:layout_height="wrap_content"
+	    android:layout_width="fill_parent"
+	    android:baselineAligned="false" >
+	    
+	    <LinearLayout android:id="@+id/Team1Layout"
+	        android:orientation="vertical"
+	        android:layout_weight="1"
+	        android:layout_height="wrap_content"
+	        android:layout_width="0dp">
+	        
+	        <EditText android:id="@+id/team1Name"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:hint="@string/team1" />
 	
-    <LinearLayout android:id="@+id/Team1Layout"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:layout_height="fill_parent"
-        android:layout_width="0dp">
-        
-        <EditText android:id="@+id/team1Name"
-	        android:layout_width="wrap_content"
+	        <TextView android:id="@+id/team1Score"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center_horizontal"
+	            android:textSize="@dimen/scoreSize"
+	            android:text="@string/filler" />
+	
+	        <Button
+	            android:id="@+id/team1AddPoint"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="@dimen/scoreButtonMargin"
+	            android:onClick="addPoint"
+	            android:text="@string/addPoint" />
+	        
+	        <Button 
+	            android:id="@+id/team1RemovePoint"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="@dimen/buttonVerticalMargin"
+	            android:onClick="removePoint"
+	            android:text="@string/removePoint" />
+	        
+	        <Button
+	            android:id="@+id/team1AddTurn"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="@dimen/buttonVerticalMargin"
+	            android:onClick="addTurn"
+	            android:text="@string/addTurn" />
+	        
+	    </LinearLayout>
+	    
+	    <LinearLayout android:id="@+id/Team2Layout"
+	        android:orientation="vertical"
+	        android:layout_weight="1"
 	        android:layout_height="wrap_content"
-	        android:hint="@string/team1" />
+	        android:layout_width="0dp">
+	        
+	        <EditText android:id="@+id/team2Name"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:hint="@string/team2"/>
+	
+	        <TextView android:id="@+id/team2Score"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center_horizontal"
+	            android:textSize="@dimen/scoreSize"
+	            android:text="@string/filler" />
+	
+	        <Button
+	            android:id="@+id/team2AddPoint"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="@dimen/scoreButtonMargin"
+	            android:onClick="addPoint"
+	            android:text="@string/addPoint" />
+	
+	        <Button 
+	            android:id="@+id/team2RemovePoint"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="@dimen/buttonVerticalMargin"
+	            android:onClick="removePoint"
+	            android:text="@string/removePoint" />
+	        
+	        <Button
+	            android:id="@+id/team2AddTurn"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="@dimen/buttonVerticalMargin"
+	            android:onClick="addTurn"
+	            android:text="@string/addTurn" />
+	        
+	    </LinearLayout>
+	</LinearLayout>
 
-        <TextView android:id="@+id/team1Score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textSize="@dimen/scoreSize"
-            android:text="@string/filler" />
-
-    </LinearLayout>
-    
-    <LinearLayout android:id="@+id/Team2Layout"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:layout_height="fill_parent"
-        android:layout_width="0dp">
-        
-        <EditText android:id="@+id/team2Name"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:hint="@string/team2"/>
-
-        <TextView android:id="@+id/team2Score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textSize="@dimen/scoreSize"
-            android:text="@string/filler" />
-
-    </LinearLayout>
+	<LinearLayout 
+	    android:layout_height="wrap_content"
+	    android:layout_width="fill_parent"
+	    android:layout_gravity="bottom"
+	    android:gravity="center"
+	    android:baselineAligned="false" >		
+		
+		<Button
+		    android:id="@+id/gameOver"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:onClick="finishGame"
+		    android:text="@string/finishGame" />
+		
+	</LinearLayout>
 
 </LinearLayout>

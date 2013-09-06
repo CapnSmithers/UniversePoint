@@ -4,6 +4,7 @@ import edu.mines.msmith1.uinversepoint.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
 
 public class NewGame extends Activity {
 
@@ -20,4 +21,20 @@ public class NewGame extends Activity {
 		return true;
 	}
 
+	public void addTurn(View view) {
+		
+	}
+	
+	public void addPoint(View view) {
+		
+	}
+
+	public void removePoint(View view) {
+		
+	}
+	
+	public void finishGame(View view) {
+		//Take user to score summary screen
+	}
 }
+
