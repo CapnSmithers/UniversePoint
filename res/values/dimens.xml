@@ -7,5 +7,6 @@
     <dimen name="buttonHorizontalMargin">8dp</dimen>
     <dimen name="scoreSize">40dp</dimen>
     <dimen name="scoreButtonMargin">15dp</dimen>
+    <dimen name="textHeaderSize">20dp</dimen>
 
 </resources>

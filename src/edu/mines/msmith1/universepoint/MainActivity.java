@@ -1,6 +1,6 @@
 package edu.mines.msmith1.universepoint;
 
-import edu.mines.msmith1.uinversepoint.R;
+import edu.mines.msmith1.universepoint.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;

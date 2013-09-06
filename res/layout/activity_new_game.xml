@@ -30,7 +30,7 @@
 	            android:layout_height="wrap_content"
 	            android:layout_gravity="center_horizontal"
 	            android:textSize="@dimen/scoreSize"
-	            android:text="@string/filler" />
+	            android:text="@string/team1Score" />
 	
 	        <Button
 	            android:id="@+id/team1AddPoint"
@@ -74,7 +74,7 @@
 	            android:layout_height="wrap_content"
 	            android:layout_gravity="center_horizontal"
 	            android:textSize="@dimen/scoreSize"
-	            android:text="@string/filler" />
+	            android:text="@string/team2Score" />
 	
 	        <Button
 	            android:id="@+id/team2AddPoint"

@@ -1,8 +1,9 @@
 package edu.mines.msmith1.universepoint;
 
-import edu.mines.msmith1.uinversepoint.R;
+import edu.mines.msmith1.universepoint.R;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 
@@ -35,6 +36,9 @@ public class NewGame extends Activity {
 	
 	public void finishGame(View view) {
 		//Take user to score summary screen
+		Intent intent = new Intent(this, ScoreSummary.class);
+		//Pass info to score summary screen
+		startActivity(intent);
 	}
 }
 

@@ -14,5 +14,15 @@
     <string name="addTurn">Add Turn</string>
     <string name="finishGame">Finish Game</string>
     <string name="removePoint">Remove Point</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_score_summary">ScoreSummary</string>
+    <string name="team1Score">N/A</string>
+    <string name="team2Score">N/A</string>
+    <string name="teamNameHeader">Team</string>
+    <string name="teamScoreHeader">Score</string>
+    <string name="teamTurnsHeader">Turnovers</string>
+    <string name="team1Turns">N/A</string>
+    <string name="team2Turns">N/A</string>
+    <string name="mainMenu">Main Menu</string>
 
 </resources>
