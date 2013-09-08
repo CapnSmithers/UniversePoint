@@ -10,6 +10,8 @@ import android.view.View;
 
 public class MainActivity extends Activity {
 
+	//Constants for intent messages
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,10 +28,10 @@ public class MainActivity extends Activity {
 	/**
 	 * Called when New Game button is pressed on main menu screen
 	 * 
-	 * @param view - View active when button is clicked
+	 * @param view - new game button
 	 */
 	public void createNewGame(View view) {
-		Log.d("NEWGAME","New app created");
+		Log.d("NEWGAME","New game created");
 		
 		//Create new game dialog screen
 		Intent intent = new Intent(this, NewGame.class);
@@ -39,9 +41,10 @@ public class MainActivity extends Activity {
 	/**
 	 * Called when Exit button is pressed from main menu screen
 	 * 
-	 * @param view - View that was called when button is clicked
+	 * @param view - exit button
 	 */
 	public void exitApp(View view) {
 		Log.d("EXIT", "App exiting");
+		this.finish();
 	}
 }
