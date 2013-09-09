@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class NewGame extends Activity {
@@ -59,6 +60,7 @@ public class NewGame extends Activity {
 				//update display
 				TextView team1Display = (TextView)findViewById(R.id.team1Score);
 				team1Display.setText(String.valueOf(team1Score));
+				break;
 				
 			case R.id.team2AddPoint:
 				Log.d("TEAM2", "button 2!");
@@ -66,6 +68,7 @@ public class NewGame extends Activity {
 				//update display
 				TextView team2Display = (TextView)findViewById(R.id.team2Score);
 				team2Display.setText(String.valueOf(team2Score));
+				break;
 		}
 	}
 
@@ -80,6 +83,7 @@ public class NewGame extends Activity {
 				//update display
 				TextView team1Display = (TextView)findViewById(R.id.team1Score);
 				team1Display.setText(String.valueOf(team1Score));
+				break;
 				
 			case R.id.team2RemovePoint:
 				if (team2Score - 1 >= 0) {
@@ -90,13 +94,29 @@ public class NewGame extends Activity {
 				//update display
 				TextView team2Display = (TextView)findViewById(R.id.team2Score);
 				team2Display.setText(String.valueOf(team2Score));
+				break;
 		}
 	}
 	
 	public void finishGame(View view) {
 		//Take user to score summary screen
 		Intent intent = new Intent(this, ScoreSummary.class);
-		//Pass info to score summary screen
+		//Pass team 1 name to score summary
+		EditText et = (EditText) findViewById(R.id.team1Name);
+		String team1Name = et.getText().toString();
+		intent.putExtra(TEAM1_NAME, team1Name);
+		
+		//And now team 2
+		EditText et2 = (EditText) findViewById(R.id.team2Name);
+		String team2Name = et2.getText().toString();
+		intent.putExtra(TEAM2_NAME, team2Name);
+		
+		//And now the scores and turnovers
+		intent.putExtra(TEAM1_SCORE, team1Score);
+		intent.putExtra(TEAM2_SCORE, team2Score);
+		intent.putExtra(TEAM1_TURNS, team1Turns);
+		intent.putExtra(TEAM2_TURNS, team2Turns);
+		
 		startActivity(intent);
 	}
 }
