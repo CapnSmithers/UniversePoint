@@ -16,8 +16,8 @@
     <string name="removePoint">Remove Point</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_score_summary">ScoreSummary</string>
-    <string name="team1Score">N/A</string>
-    <string name="team2Score">N/A</string>
+    <string name="team1Score">0</string>
+    <string name="team2Score">0</string>
     <string name="teamNameHeader">Team</string>
     <string name="teamScoreHeader">Score</string>
     <string name="teamTurnsHeader">Turnovers</string>
@@ -26,5 +26,6 @@
     <string name="mainMenu">Main Menu</string>
     <string name="removeError">Cannot go below 0</string>
     <string name="scoreLoadError">Error retrieving game data</string>
+    <string name="removeTurn">Remove Turn</string>
 
 </resources>

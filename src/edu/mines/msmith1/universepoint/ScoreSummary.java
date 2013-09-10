@@ -1,3 +1,11 @@
+/**
+ * Description: This class provides the functionality behind the score summary 
+ *   screen.  It accepts variables from the NewGame class via the intent.putExtra()
+ *   function, and sets the variables to the appropriate displays. Provides navigation
+ *   to the main menu or the new game (score-keeping) screens. 
+ * 
+ * @author Matt
+ */
 package edu.mines.msmith1.universepoint;
 
 import android.os.Bundle;
@@ -18,7 +26,9 @@ public class ScoreSummary extends Activity {
 		Intent prevIntent = getIntent();
 		Bundle b = prevIntent.getExtras();
 		
+		//Make sure that intent extras were received
 		if (b != null) {
+			//Pull values
 			String team1Name = b.getString(NewGame.TEAM1_NAME);
 			String team2Name = b.getString(NewGame.TEAM2_NAME);
 			int team1Score = b.getInt(NewGame.TEAM1_SCORE);
@@ -56,12 +66,23 @@ public class ScoreSummary extends Activity {
 		return true;
 	}
 	
+	/**
+	 * This method creates an intent and takes the user to the main menu
+	 * 
+	 * @param view - Main Menu button
+	 */
 	public void mainMenu(View view) {
 		//Take user to main menu
 		Intent i = new Intent(this, MainActivity.class);
 		startActivity(i);
 	}
 	
+	/**
+	 * This method creates an intent and takes the user to the scorekeeping 
+	 * screen.
+	 * 
+	 * @param view - New Game button
+	 */
 	public void startNewGame(View view) {
 		//Take user to new game screen
 		Intent i = new Intent(this, NewGame.class);

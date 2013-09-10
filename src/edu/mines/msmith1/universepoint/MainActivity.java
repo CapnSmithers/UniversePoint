@@ -1,3 +1,15 @@
+/**
+ * Description: Main menu for Universe Point app.  Provides 
+ *   navigation to score-keeping screen. Currently only has new game and exit 
+ *   buttons - more options will be implemented. 
+ *   
+ * Documentation Statement: According to the Academic Honesty Policy outlined in the 
+ *   course syllabus, I have been the sole author and debugger of this piece of 
+ *   software. The only resources that I have used are developer.android.com and class 
+ *   notes.
+ * 
+ * @author Matthew Smith
+ */
 package edu.mines.msmith1.universepoint;
 
 import edu.mines.msmith1.universepoint.R;
@@ -9,8 +21,6 @@ import android.view.Menu;
 import android.view.View;
 
 public class MainActivity extends Activity {
-
-	//Constants for intent messages
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +36,8 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * Called when New Game button is pressed on main menu screen
+	 * Called when New Game button is pressed on main menu screen.
+	 * Takes user to scorekeeping screen
 	 * 
 	 * @param view - new game button
 	 */
@@ -39,7 +50,7 @@ public class MainActivity extends Activity {
 	}
 	
 	/**
-	 * Called when Exit button is pressed from main menu screen
+	 * Called when Exit button is pressed from main menu screen. Calls app.finish()
 	 * 
 	 * @param view - exit button
 	 */

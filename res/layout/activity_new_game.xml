@@ -24,13 +24,48 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:hint="@string/team1" />
-	
-	        <TextView android:id="@+id/team1Score"
-	            android:layout_width="wrap_content"
+			
+	        <LinearLayout
+	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
-	            android:layout_gravity="center_horizontal"
-	            android:textSize="@dimen/scoreSize"
-	            android:text="@string/team1Score" />
+	            android:orientation="horizontal" >
+	            
+	            <TextView android:id="@+id/score1Label"
+	            	android:layout_width="0dp"
+	            	android:layout_height="wrap_content"
+	            	android:layout_weight="1"
+	            	android:text="@string/teamScoreHeader" />
+	            
+	            <TextView android:id="@+id/turns1Label"
+	            	android:layout_width="0dp"
+	            	android:layout_height="wrap_content"
+	            	android:layout_weight="1"
+	            	android:text="@string/teamTurnsHeader" />
+	            
+	        </LinearLayout>
+	        
+	        <LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	            
+	            <TextView android:id="@+id/team1Score"
+	            	android:layout_width="0dp"
+	            	android:layout_height="wrap_content"
+	            	android:layout_weight="1"
+	            	android:textSize="@dimen/scoreSize"
+	            	android:text="@string/team1Score" />
+	            
+	            <TextView android:id="@+id/team1Turns"
+	            	android:layout_width="0dp"
+	            	android:layout_height="wrap_content"
+	            	android:layout_weight="1"
+	            	android:textSize="@dimen/scoreSize"
+	            	android:text="@string/team1Score" />
+	            
+	        </LinearLayout>
+	        
+	        
 	
 	        <Button
 	            android:id="@+id/team1AddPoint"
@@ -56,9 +91,17 @@
 	            android:onClick="addTurn"
 	            android:text="@string/addTurn" />
 	        
+	        <Button
+	            android:id="@+id/team1RemoveTurn"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="@dimen/buttonVerticalMargin"
+	            android:onClick="removeTurn"
+	            android:text="@string/removeTurn" />
+	        
 	    </LinearLayout>
 	    
-	    <LinearLayout android:id="@+id/Team2Layout"
+	   <LinearLayout android:id="@+id/Team2Layout"
 	        android:orientation="vertical"
 	        android:layout_weight="1"
 	        android:layout_height="wrap_content"
@@ -69,12 +112,45 @@
 		        android:layout_height="wrap_content"
 		        android:hint="@string/team2"/>
 	
-	        <TextView android:id="@+id/team2Score"
-	            android:layout_width="wrap_content"
+	        <LinearLayout
+	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
-	            android:layout_gravity="center_horizontal"
-	            android:textSize="@dimen/scoreSize"
-	            android:text="@string/team2Score" />
+	            android:orientation="horizontal" >
+	            
+	            <TextView android:id="@+id/score2Label"
+	            	android:layout_width="0dp"
+	            	android:layout_height="wrap_content"
+	            	android:layout_weight="1"
+	            	android:text="@string/teamScoreHeader" />
+	            
+	            <TextView android:id="@+id/turns2Label"
+	            	android:layout_width="0dp"
+	            	android:layout_height="wrap_content"
+	            	android:layout_weight="1"
+	            	android:text="@string/teamTurnsHeader" />
+	            
+	        </LinearLayout>
+	        
+	        <LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:orientation="horizontal" >
+	            
+	            <TextView android:id="@+id/team2Score"
+	            	android:layout_width="0dp"
+	            	android:layout_height="wrap_content"
+	            	android:layout_weight="1"
+	            	android:textSize="@dimen/scoreSize"
+	            	android:text="@string/team2Score" />
+	            
+	            <TextView android:id="@+id/team2Turns"
+	            	android:layout_width="0dp"
+	            	android:layout_height="wrap_content"
+	            	android:layout_weight="1"
+	            	android:textSize="@dimen/scoreSize"
+	            	android:text="@string/team2Score" />
+	            
+	        </LinearLayout>
 	
 	        <Button
 	            android:id="@+id/team2AddPoint"
@@ -99,6 +175,14 @@
 	            android:layout_marginTop="@dimen/buttonVerticalMargin"
 	            android:onClick="addTurn"
 	            android:text="@string/addTurn" />
+	        
+	        <Button
+	            android:id="@+id/team2RemoveTurn"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="@dimen/buttonVerticalMargin"
+	            android:onClick="removeTurn"
+	            android:text="@string/removeTurn" />
 	        
 	    </LinearLayout>
 	</LinearLayout>
