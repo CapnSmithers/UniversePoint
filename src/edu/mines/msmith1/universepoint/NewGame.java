@@ -3,12 +3,15 @@ package edu.mines.msmith1.universepoint;
 import edu.mines.msmith1.universepoint.R;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NewGame extends Activity {
 
@@ -28,6 +31,74 @@ public class NewGame extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_game);
+		
+		//Delete shared prefs, if any
+		SharedPreferences sharedPref = this.getPreferences( Context.MODE_PRIVATE );
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.clear();
+		editor.commit();
+		
+		//Set textviews 
+		TextView score1 = (TextView) findViewById(R.id.team1Score);
+		score1.setText(String.valueOf(team1Score));
+		
+		TextView score2 = (TextView) findViewById(R.id.team2Score);
+		score2.setText(String.valueOf(team2Score));
+	}		
+	
+	@Override
+	protected void onDestroy() {
+		// Delete scores from shared prefs
+		super.onDestroy();
+		
+		SharedPreferences sharedPref = this.getPreferences( Context.MODE_PRIVATE );
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.clear();
+		editor.commit();
+		
+		Log.d("EXITING APP", "Universe Point is destroyed");
+	}
+
+	@Override
+	protected void onPause() {
+		Log.d("ON_PAUSE", "onPause called");
+		
+		EditText et = (EditText) findViewById(R.id.team1Name);
+		team1Name = et.getText().toString();
+				
+		EditText et2 = (EditText) findViewById(R.id.team2Name);
+		team2Name = et2.getText().toString();
+		
+		//Open shared prefs
+		SharedPreferences sharedPref = this.getPreferences( Context.MODE_PRIVATE );
+		SharedPreferences.Editor editor = sharedPref.edit();
+		
+		//Add values to shared prefs and commit
+		editor.putString(TEAM1_NAME, team1Name);
+		editor.putString(TEAM2_NAME, team2Name);
+		editor.putInt(TEAM1_SCORE, team1Score);
+		editor.putInt(TEAM2_SCORE, team2Score);
+		editor.putInt(TEAM1_TURNS, team1Turns);
+		editor.putInt(TEAM2_TURNS, team2Turns);
+	    editor.commit();
+		super.onPause();
+	}
+
+	@Override
+	protected void onResume() {
+		// Open shared prefs
+		SharedPreferences sharedPrefs = this.getPreferences( Context.MODE_PRIVATE );
+		
+		Log.d("ON_RESUME", "OnResume Called");
+		
+		//Assign shared prefs to appropriate values
+		team1Name = sharedPrefs.getString(TEAM1_NAME, "");
+		team2Name = sharedPrefs.getString(TEAM2_NAME, "");
+		team1Score = sharedPrefs.getInt(TEAM1_SCORE, 0);
+		team2Score = sharedPrefs.getInt(TEAM2_SCORE, 0);
+		team1Turns = sharedPrefs.getInt(TEAM1_TURNS, 0);
+		team2Turns = sharedPrefs.getInt(TEAM2_TURNS, 0);
+		super.onResume();
 	}
 
 	@Override
@@ -79,6 +150,7 @@ public class NewGame extends Activity {
 					team1Score -= 1;
 				} else {
 					//toast pop-up saying can't go lower than 0
+					Toast.makeText(getApplicationContext(), getString(R.string.removeError), Toast.LENGTH_SHORT).show();
 				}
 				//update display
 				TextView team1Display = (TextView)findViewById(R.id.team1Score);
@@ -90,6 +162,7 @@ public class NewGame extends Activity {
 					team2Score -= 1;
 				} else {
 					//toast pop-up saying can't go lower than 0
+					Toast.makeText(getApplicationContext(), getString(R.string.removeError), Toast.LENGTH_SHORT).show();
 				}
 				//update display
 				TextView team2Display = (TextView)findViewById(R.id.team2Score);
@@ -103,12 +176,12 @@ public class NewGame extends Activity {
 		Intent intent = new Intent(this, ScoreSummary.class);
 		//Pass team 1 name to score summary
 		EditText et = (EditText) findViewById(R.id.team1Name);
-		String team1Name = et.getText().toString();
+		team1Name = et.getText().toString();
 		intent.putExtra(TEAM1_NAME, team1Name);
 		
 		//And now team 2
 		EditText et2 = (EditText) findViewById(R.id.team2Name);
-		String team2Name = et2.getText().toString();
+		team2Name = et2.getText().toString();
 		intent.putExtra(TEAM2_NAME, team2Name);
 		
 		//And now the scores and turnovers

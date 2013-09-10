@@ -24,5 +24,7 @@
     <string name="team1Turns">N/A</string>
     <string name="team2Turns">N/A</string>
     <string name="mainMenu">Main Menu</string>
+    <string name="removeError">Cannot go below 0</string>
+    <string name="scoreLoadError">Error retrieving game data</string>
 
 </resources>
