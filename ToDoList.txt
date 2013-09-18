@@ -1,0 +1,7 @@
+Ideas to implement:
+
+- Database storage for teams
+- Dynamic UI for score input
+
+TODO:
+
