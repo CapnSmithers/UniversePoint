@@ -3,6 +3,8 @@
  *   navigation to score-keeping screen. Currently only has new game and exit 
  *   buttons - more options will be implemented. 
  *   
+ * Usage: Used Nexus 4 emulator and Nexus 7 tablet to test.  Target API is 18  
+ * 
  * Documentation Statement: According to the Academic Honesty Policy outlined in the 
  *   course syllabus, I have been the sole author and debugger of this piece of 
  *   software. The only resources that I have used are developer.android.com and class 
