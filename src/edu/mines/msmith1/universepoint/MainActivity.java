@@ -47,17 +47,15 @@ public class MainActivity extends Activity {
 		Log.d("NEWGAME","New game created");
 		
 		//Create new game dialog screen
-		Intent intent = new Intent(this, NewGame.class);
+		Intent intent = new Intent(this, GameRunner.class);
 		startActivity(intent);
 	}
 	
-	/**
-	 * Called when Exit button is pressed from main menu screen. Calls app.finish()
-	 * 
-	 * @param view - exit button
-	 */
-	public void exitApp(View view) {
-		Log.d("EXIT", "App exiting");
-		this.finish();
+	public void createTeam(View view) {
+		Log.d("EDIT TEAMS", "Edit team button pressed");
+		
+		//Bring up create new team intent
+		Intent intent = new Intent(this, EditTeams.class);
+		startActivity(intent);
 	}
 }

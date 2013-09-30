@@ -21,8 +21,8 @@
         android:text="@string/newgame"
         android:onClick="createNewGame" />
     
-    <!-- Exit application button -->
-    <Button android:id="@+id/exitapp"
+    <!-- Edit Team button -->
+    <Button android:id="@+id/createTeam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/buttonVerticalMargin"
@@ -31,7 +31,20 @@
         android:layout_marginLeft="@dimen/buttonHorizontalMargin"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/newgame"
-        android:text="@string/exitapp"
-        android:onClick="exitApp" />
+        android:text="@string/createTeam"
+        android:onClick="createTeam" />
+    
+    <!--  View/Edit Games Button -->
+    <Button android:id="@+id/viewGames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/buttonVerticalMargin"
+        android:layout_marginTop="@dimen/buttonVerticalMargin"
+        android:layout_marginRight="@dimen/buttonHorizontalMargin"
+        android:layout_marginLeft="@dimen/buttonHorizontalMargin"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/createTeam"
+        android:text="@string/viewGames"
+        android:onClick="viewGames" />
         
 </RelativeLayout>

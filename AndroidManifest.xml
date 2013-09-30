@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="edu.mines.msmith1.universepoint.NewGame"
+            android:name="edu.mines.msmith1.universepoint.GameRunner"
             android:label="@string/title_activity_new_game" 
             android:configChanges="orientation|screenSize" >
         </activity>

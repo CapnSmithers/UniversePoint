@@ -29,12 +29,12 @@ public class ScoreSummary extends Activity {
 		//Make sure that intent extras were received
 		if (b != null) {
 			//Pull values
-			String team1Name = b.getString(NewGame.TEAM1_NAME);
-			String team2Name = b.getString(NewGame.TEAM2_NAME);
-			int team1Score = b.getInt(NewGame.TEAM1_SCORE);
-			int team2Score = b.getInt(NewGame.TEAM2_SCORE);
-			int team1Turns = b.getInt(NewGame.TEAM1_TURNS);
-			int team2Turns = b.getInt(NewGame.TEAM2_TURNS);
+			String team1Name = b.getString(GameRunner.TEAM1_NAME);
+			String team2Name = b.getString(GameRunner.TEAM2_NAME);
+			int team1Score = b.getInt(GameRunner.TEAM1_SCORE);
+			int team2Score = b.getInt(GameRunner.TEAM2_SCORE);
+			int team1Turns = b.getInt(GameRunner.TEAM1_TURNS);
+			int team2Turns = b.getInt(GameRunner.TEAM2_TURNS);
 			
 			//Set values for all of the score stuffs
 			TextView name1 = (TextView) findViewById(R.id.box_team1Name);
@@ -85,7 +85,7 @@ public class ScoreSummary extends Activity {
 	 */
 	public void startNewGame(View view) {
 		//Take user to new game screen
-		Intent i = new Intent(this, NewGame.class);
+		Intent i = new Intent(this, GameRunner.class);
 		startActivity(i);
 	}
 
