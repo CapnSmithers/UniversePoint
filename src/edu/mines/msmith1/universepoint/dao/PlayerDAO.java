@@ -23,26 +23,22 @@ public class PlayerDAO extends BaseDAO {
 	}
 	
 	public Player createPlayer(Player player) {
-		ContentValues values = new ContentValues();
-		values.put(SQLiteHelper.COLUMN_NAME, player.getName());
-		values.put(SQLiteHelper.COLUMN_TEAM_ID, player.getTeam().getId());
+		ContentValues values = getContentValues(player);
 		long insertId = db.insert(SQLiteHelper.TABLE_PLAYER, null, values);
 		return getPlayerById(insertId);
 	}
 	
 	public Player updatePlayer(Player player) {
 		String[] whereArgs = getWhereArgsWithId(player);
-		ContentValues values = new ContentValues();
-		values.put(SQLiteHelper.COLUMN_NAME, player.getName());
-		values.put(SQLiteHelper.COLUMN_TEAM_ID, player.getTeam().getId());
-		db.update(SQLiteHelper.TABLE_PLAYER, values, SQLiteHelper.COLUMN_ID + " = ?", whereArgs);
+		ContentValues values = getContentValues(player);
+		db.update(SQLiteHelper.TABLE_PLAYER, values, WHERE_SELECTION_FOR_ID, whereArgs);
 		return getPlayerById(player.getId());
 	}
 	
 	public void deletePlayer(Player player) {
 		String[] whereArgs = getWhereArgsWithId(player);
 		Log.d(LOG_TAG, "deleting player with id " + whereArgs[0]);
-		db.delete(SQLiteHelper.TABLE_PLAYER, SQLiteHelper.COLUMN_ID + " = ?", whereArgs);
+		db.delete(SQLiteHelper.TABLE_PLAYER, WHERE_SELECTION_FOR_ID, whereArgs);
 	}
 	
 	public List<Player> getPlayers() {
@@ -62,7 +58,7 @@ public class PlayerDAO extends BaseDAO {
 	
 	public Player getPlayerById(long id) {
 		String[] whereArgs = {String.valueOf(id)};
-		Cursor cursor = db.query(SQLiteHelper.TABLE_PLAYER, columns, SQLiteHelper.COLUMN_ID + " = ?",
+		Cursor cursor = db.query(SQLiteHelper.TABLE_PLAYER, columns, WHERE_SELECTION_FOR_ID,
 				whereArgs, null, null, null);
 		cursor.moveToFirst();
 		Player player = cursorToPlayer(cursor);
@@ -79,6 +75,13 @@ public class PlayerDAO extends BaseDAO {
 			player.setTeam(teamDAO.getTeamById(cursor.getLong(2)));
 		}
 		return player;
+	}
+
+	private ContentValues getContentValues(Player player) {
+		ContentValues values = new ContentValues();
+		values.put(SQLiteHelper.COLUMN_NAME, player.getName());
+		values.put(SQLiteHelper.COLUMN_TEAM_ID, player.getTeam().getId());
+		return values;
 	}
 	
 	@Override

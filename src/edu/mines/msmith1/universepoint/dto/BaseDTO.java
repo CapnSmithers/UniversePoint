@@ -1,6 +1,6 @@
 package edu.mines.msmith1.universepoint.dto;
 
-public class BaseDTO {
+public abstract class BaseDTO {
 	long id;
 	
 	public long getId() {

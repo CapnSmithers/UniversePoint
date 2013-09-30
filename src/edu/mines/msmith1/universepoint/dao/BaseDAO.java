@@ -6,7 +6,9 @@ import android.database.sqlite.SQLiteDatabase;
 import edu.mines.msmith1.universepoint.SQLiteHelper;
 import edu.mines.msmith1.universepoint.dto.BaseDTO;
 
-public class BaseDAO {
+public abstract class BaseDAO {
+	protected static final String WHERE_SELECTION_FOR_ID = SQLiteHelper.COLUMN_ID + " = ?";
+	
 	protected SQLiteDatabase db;
 	protected SQLiteHelper dbHelper;
 	
