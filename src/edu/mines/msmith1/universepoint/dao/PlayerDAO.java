@@ -6,35 +6,26 @@ import java.util.List;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import edu.mines.msmith1.universepoint.SQLiteHelper;
 import edu.mines.msmith1.universepoint.dto.Player;
 
-public class PlayerDAO {
+public class PlayerDAO extends BaseDAO {
 	private static final String LOG_TAG = PlayerDAO.class.getSimpleName();
 	
-	private SQLiteDatabase db;
-	private SQLiteHelper dbHelper;
-	private String[] columns = {SQLiteHelper.COLUMN_ID, SQLiteHelper.COLUMN_NAME};
+	private String[] columns = {SQLiteHelper.COLUMN_ID, SQLiteHelper.COLUMN_NAME, SQLiteHelper.COLUMN_TEAM_ID};
+	private TeamDAO teamDAO;
 	
 	public PlayerDAO(Context context) {
-		dbHelper = new SQLiteHelper(context);
-	}
-	
-	// TODO move methods to a base DAO class
-	public void open() throws SQLException {
-		db = dbHelper.getWritableDatabase();
-	}
-	
-	public void close() {
-		dbHelper.close();
+		super(context);
+		teamDAO = new TeamDAO(context);
+		teamDAO.open();
 	}
 	
 	public Player createPlayer(Player player) {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_NAME, player.getName());
+		values.put(SQLiteHelper.COLUMN_TEAM_ID, player.getTeam().getId());
 		long insertId = db.insert(SQLiteHelper.TABLE_PLAYER, null, values);
 		return getPlayerById(insertId);
 	}
@@ -43,6 +34,7 @@ public class PlayerDAO {
 		String[] whereArgs = getWhereArgsWithId(player);
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_NAME, player.getName());
+		values.put(SQLiteHelper.COLUMN_TEAM_ID, player.getTeam().getId());
 		db.update(SQLiteHelper.TABLE_PLAYER, values, SQLiteHelper.COLUMN_ID + " = ?", whereArgs);
 		return getPlayerById(player.getId());
 	}
@@ -79,18 +71,19 @@ public class PlayerDAO {
 	}
 	
 	private Player cursorToPlayer(Cursor cursor) {
-		Player player = new Player();
-		player.setId(cursor.getLong(0));
-		player.setName(cursor.getString(1));
+		Player player = null;
+		if (!cursor.isAfterLast()) {
+			player = new Player();
+			player.setId(cursor.getLong(0));
+			player.setName(cursor.getString(1));
+			player.setTeam(teamDAO.getTeamById(cursor.getLong(2)));
+		}
 		return player;
 	}
 	
-	/**
-	 * @param player
-	 * @return creates String[] containing only the player id
-	 */
-	private String[] getWhereArgsWithId(Player player) {
-		String[] whereArgs = {String.valueOf(player.getId())};
-		return whereArgs;
+	@Override
+	public void close() {
+		super.close();
+		teamDAO.close();
 	}
 }
