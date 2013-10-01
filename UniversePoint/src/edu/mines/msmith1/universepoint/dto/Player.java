@@ -1,5 +1,9 @@
 package edu.mines.msmith1.universepoint.dto;
 
+/**
+ * POJO representation of Player table.
+ * @author vanxrice
+ */
 public class Player extends BaseDTO {
 	private String name;
 	private Team team;

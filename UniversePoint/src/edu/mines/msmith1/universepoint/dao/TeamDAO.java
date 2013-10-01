@@ -11,6 +11,10 @@ import edu.mines.msmith1.universepoint.SQLiteHelper;
 import edu.mines.msmith1.universepoint.dto.BaseDTO;
 import edu.mines.msmith1.universepoint.dto.Team;
 
+/**
+ * DAO for {@link Team} table.
+ * @author vanxrice
+ */
 public class TeamDAO extends BaseDAO {
 	private static final String LOG_TAG = TeamDAO.class.getSimpleName();
 	
@@ -20,12 +24,20 @@ public class TeamDAO extends BaseDAO {
 		super(context);
 	}
 	
+	/**
+	 * @param team to be added
+	 * @return persisted team
+	 */
 	public Team createTeam(Team team) {
 		ContentValues values = getContentValues(team);
 		long insertId = db.insert(SQLiteHelper.TABLE_TEAM, null, values);
 		return getTeamById(insertId);
 	}
 	
+	/**
+	 * @param team to be updated
+	 * @return updated team
+	 */
 	public Team updateTeam(Team team) {
 		String[] whereArgs = getWhereArgsWithId(team);
 		ContentValues values = getContentValues(team);
@@ -33,12 +45,18 @@ public class TeamDAO extends BaseDAO {
 		return getTeamById(team.getId());
 	}
 	
+	/**
+	 * @param team to be deleted
+	 */
 	public void deleteTeam(Team team) {
 		String[] whereArgs = getWhereArgsWithId(team);
 		Log.d(LOG_TAG, "deleting team with id " + whereArgs[0]);
 		db.delete(SQLiteHelper.TABLE_TEAM, WHERE_SELECTION_FOR_ID, whereArgs);
 	}
 	
+	/**
+	 * @return all teams
+	 */
 	public List<BaseDTO> getTeams() {
 		List<BaseDTO> teams = new ArrayList<BaseDTO>();
 		
@@ -54,6 +72,10 @@ public class TeamDAO extends BaseDAO {
 		return teams;
 	}
 	
+	/**
+	 * @param id
+	 * @return team matching id, null if id is not found
+	 */
 	public Team getTeamById(long id) {
 		String[] whereArgs = {String.valueOf(id)};
 		Cursor cursor = db.query(SQLiteHelper.TABLE_TEAM, columns, WHERE_SELECTION_FOR_ID, whereArgs,
@@ -64,6 +86,10 @@ public class TeamDAO extends BaseDAO {
 		return team;
 	}
 	
+	/**
+	 * Converts a {@link Cursor} to {@link Team}
+	 * @param cursor
+	 */
 	private Team cursorToTeam(Cursor cursor) {
 		Team team = null;
 		if (!cursor.isAfterLast()) {
@@ -74,6 +100,10 @@ public class TeamDAO extends BaseDAO {
 		return team;
 	}
 
+	/**
+	 * Populates {@link ContentValues} with values from {@link Team}
+	 * @param team
+	 */
 	private ContentValues getContentValues(Team team) {
 		ContentValues values = new ContentValues();
 		values.put(SQLiteHelper.COLUMN_NAME, team.getName());

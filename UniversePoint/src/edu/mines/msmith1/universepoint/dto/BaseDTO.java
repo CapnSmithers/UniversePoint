@@ -1,5 +1,10 @@
 package edu.mines.msmith1.universepoint.dto;
 
+/**
+ * Base class for DTO objects. Subclasses are required to implement toString() to reduce
+ * {@link View} complexity.
+ * @author vanxrice
+ */
 public abstract class BaseDTO {
 	long id;
 	

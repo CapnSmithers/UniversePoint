@@ -6,6 +6,10 @@ import android.database.sqlite.SQLiteDatabase;
 import edu.mines.msmith1.universepoint.SQLiteHelper;
 import edu.mines.msmith1.universepoint.dto.BaseDTO;
 
+/**
+ * Handles core DAO functionality and random helper functions.
+ * @author vanxrice
+ */
 public abstract class BaseDAO {
 	protected static final String WHERE_SELECTION_FOR_ID = SQLiteHelper.COLUMN_ID + " = ?";
 	

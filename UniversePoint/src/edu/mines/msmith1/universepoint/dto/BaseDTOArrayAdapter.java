@@ -11,6 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * An {@link ArrayAdapter} that handles DTO objects generically by populating a {@link TextView}
+ * with {@link BaseDTO#toString()}.
+ * @author vanxrice
+ */
 public class BaseDTOArrayAdapter extends ArrayAdapter<BaseDTO> {
 	private List<BaseDTO> mValues;
 	private int mResource; // specifies the view to use when instantiating views
