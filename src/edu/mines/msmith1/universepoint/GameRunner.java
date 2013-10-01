@@ -11,7 +11,9 @@ package edu.mines.msmith1.universepoint;
 
 import edu.mines.msmith1.universepoint.R;
 import android.os.Bundle;
+import android.provider.MediaStore.Audio.PlaylistsColumns;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,14 +26,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class GameRunner extends FragmentActivity {
+public class GameRunner extends FragmentActivity implements PlayerListFragment.ListItemSelectedListener {
 
-	//Constants for intent messages - for package-unique names
 	public final static int FINISH_GAME_ID = 1;
 	
-	//variables to keep track of score, name, and turnovers
-	private int team1Score, team2Score, team1Turns, team2Turns = 0;
-	private String team1Name, team2Name;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,20 @@ public class GameRunner extends FragmentActivity {
 		
 		Log.d("APP_CREATED", "New instance of universe point");
 		
-
+		Bundle teamId = getIntent().getExtras();
+		
+		//Inflate player list fragment
+		if(findViewById(R.id.listContainer) != null) {
+			if (savedInstanceState != null) {
+				return;
+			}
+			
+			PlayerListFragment playerList = new PlayerListFragment();
+			playerList.setArguments(getIntent().getExtras());       // TODO: populate player list with database entries for
+																	// given team
+			getSupportFragmentManager().beginTransaction()
+				.add(R.id.listContainer, playerList).commit();
+		}
 	}		
 
 	@Override
@@ -82,6 +93,12 @@ public class GameRunner extends FragmentActivity {
 	}
 
 	private void finishGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void listItemSelected(int position) {
 		// TODO Auto-generated method stub
 		
 	}
