@@ -35,5 +35,6 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="nameNotNullToastMessage">Name cannot be empty, the save did not occur.</string>
+    <string name="oops">There doesn\'t appear to be anything here</string>
 
 </resources>
