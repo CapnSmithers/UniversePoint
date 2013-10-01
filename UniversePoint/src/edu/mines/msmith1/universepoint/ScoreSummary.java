@@ -29,13 +29,7 @@ public class ScoreSummary extends Activity {
 		//Make sure that intent extras were received
 		if (b != null) {
 			//Pull values
-			String team1Name = b.getString(GameRunner.TEAM1_NAME);
-			String team2Name = b.getString(GameRunner.TEAM2_NAME);
-			int team1Score = b.getInt(GameRunner.TEAM1_SCORE);
-			int team2Score = b.getInt(GameRunner.TEAM2_SCORE);
-			int team1Turns = b.getInt(GameRunner.TEAM1_TURNS);
-			int team2Turns = b.getInt(GameRunner.TEAM2_TURNS);
-			
+
 			//Set values for all of the score stuffs
 			TextView name1 = (TextView) findViewById(R.id.box_team1Name);
 			TextView name2 = (TextView) findViewById(R.id.box_team2Name);
@@ -44,12 +38,6 @@ public class ScoreSummary extends Activity {
 			TextView turns1 = (TextView) findViewById(R.id.box_team1Turns);
 			TextView turns2 = (TextView) findViewById(R.id.box_team2Turns);
 			
-			name1.setText(team1Name);
-			name2.setText(team2Name);
-			score1.setText(String.valueOf(team1Score));
-			score2.setText(String.valueOf(team2Score));
-			turns1.setText(String.valueOf(team1Turns));
-			turns2.setText(String.valueOf(team2Turns));
 			
 		} else {
 			//Don't set text -- something went wrong on the screen before

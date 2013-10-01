@@ -2,6 +2,8 @@ package edu.mines.msmith1.universepoint;
 
 import android.app.Activity;
 import android.app.ListFragment;
+import android.view.View;
+import android.widget.ListView;
 
 public class PlayerListFragment extends ListFragment {
 	ListItemSelectedListener playerSelectedListener;
@@ -19,5 +21,11 @@ public class PlayerListFragment extends ListFragment {
 		 } catch (ClassCastException e) {
 			 throw new ClassCastException(activity.toString() + " must implement ListItemSelectedListener");
 		 }
+	 }
+	 
+	 //Send info back to GameRunner class
+	 @Override
+	 public void onListItemClick(ListView l, View v, int position, long id) {
+		 playerSelectedListener.listItemSelected(position);
 	 }
 }

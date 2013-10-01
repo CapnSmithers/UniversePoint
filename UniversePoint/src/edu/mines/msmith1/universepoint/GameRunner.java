@@ -11,7 +11,6 @@ package edu.mines.msmith1.universepoint;
 
 import edu.mines.msmith1.universepoint.R;
 import android.os.Bundle;
-import android.provider.MediaStore.Audio.PlaylistsColumns;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -26,7 +25,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class GameRunner extends FragmentActivity implements PlayerListFragment.ListItemSelectedListener {
+public class GameRunner extends Activity implements PlayerListFragment.ListItemSelectedListener {
 
 	public final static int FINISH_GAME_ID = 1;
 	
@@ -35,8 +34,6 @@ public class GameRunner extends FragmentActivity implements PlayerListFragment.L
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scorekeeping);
-		
-		Log.d("APP_CREATED", "New instance of universe point");
 		
 		Bundle teamId = getIntent().getExtras();
 		
@@ -49,8 +46,8 @@ public class GameRunner extends FragmentActivity implements PlayerListFragment.L
 			PlayerListFragment playerList = new PlayerListFragment();
 			playerList.setArguments(getIntent().getExtras());       // TODO: populate player list with database entries for
 																	// given team
-			getSupportFragmentManager().beginTransaction()
-				.add(R.id.listContainer, playerList).commit();
+			getFragmentManager().beginTransaction()
+				.add(R.id.listContainer, (Fragment)playerList).commit();
 		}
 	}		
 
@@ -99,10 +96,9 @@ public class GameRunner extends FragmentActivity implements PlayerListFragment.L
 
 	@Override
 	public void listItemSelected(int position) {
-		// TODO Auto-generated method stub
+		// TODO Swap out player list fragment with player stats fragment
 		
 	}
 	
-
 }
 
