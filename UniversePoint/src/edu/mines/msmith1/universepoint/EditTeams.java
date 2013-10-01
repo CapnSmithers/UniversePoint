@@ -148,7 +148,7 @@ public class EditTeams extends ListActivity {
 		builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				removeTeam(team);
+				removeTeam((Team) team);
 			}
 		});
 		
@@ -166,8 +166,9 @@ public class EditTeams extends ListActivity {
 	 * Deletes the team from the database and refreshes view
 	 * @param team to be removed from database
 	 */
-	private void removeTeam(BaseDTO team) {
-		// TODO 
+	private void removeTeam(Team team) {
+		mTeamAdapter.remove(team);
+		mTeamDAO.deleteTeam(team);
 	}
 	
 	/**
