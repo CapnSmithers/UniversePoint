@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -48,5 +49,10 @@ public class MainActivity extends Activity {
 		//Bring up create new team intent
 		Intent intent = new Intent(this, EditTeams.class);
 		startActivity(intent);
+	}
+	
+	public void viewGames(View view) {
+		Toast toast = Toast.makeText(this, R.string.noNotYet, Toast.LENGTH_SHORT);
+		toast.show();
 	}
 }

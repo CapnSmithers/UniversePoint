@@ -38,5 +38,6 @@
     <string name="turnsTitle">Turnovers</string>
     <string name="assistsTitle">Assists</string>
     <string name="scoresTitle">Scores</string>
+    <string name="noNotYet">No, not yet.</string>
 
 </resources>
