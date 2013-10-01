@@ -1,0 +1,109 @@
+<?xml version="1" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+	<TextView android:id="@+id/playerName"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/playerName" 
+	    android:textSize="@dimen/titleSize" />
+
+	<TextView
+	    android:id="@+id/points"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/scoresTitle"
+	    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
+
+		<TextView
+		    android:id="@+id/pointCount"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/nullValue"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<Button
+		    android:id="@+id/addPoint"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/addButton" />
+
+		<Button
+		    android:id="@+id/removePoint"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/removeButton" />
+
+	</LinearLayout>
+
+	<TextView
+	    android:id="@+id/assists"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/assistsTitle"
+	    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
+
+		<TextView
+		    android:id="@+id/assistCount"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/nullValue"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<Button
+		    android:id="@+id/addAssist"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/addButton" />
+
+		<Button
+		    android:id="@+id/removeAssist"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/removeButton" />
+
+	</LinearLayout>
+
+	<TextView
+	    android:id="@+id/turnovers"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/turnsTitle"
+	    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
+
+		<TextView
+		    android:id="@+id/turnCount"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/nullValue"
+		    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+		<Button
+		    android:id="@+id/addTurn"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/addButton" />
+
+		<Button
+		    android:id="@+id/removeTurn"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/removeButton" />
+
+	</LinearLayout>
+
+</LinearLayout>
