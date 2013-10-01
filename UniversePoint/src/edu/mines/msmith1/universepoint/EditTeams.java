@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
@@ -51,9 +52,8 @@ public class EditTeams extends ListActivity {
 	public void onResume() {
 		super.onResume();
 		
-		// TODO this should be run in it's own thread or AsyncTask
 		mTeamDAO.open();
-		List<BaseDTO> teams = mTeamDAO.getTeams();
+		List<BaseDTO> teams = new AllTeamsAsyncTask().doInBackground(mTeamDAO);
 		
 		mTeamAdapter = new BaseDTOArrayAdapter(this, R.layout.list_row, teams);
 		setListAdapter(mTeamAdapter);
@@ -118,5 +118,17 @@ public class EditTeams extends ListActivity {
 	private void showToastForNullTeamName() {
 		Toast toast = Toast.makeText(this, R.string.nameNotNullToastMessage, Toast.LENGTH_SHORT);
 		toast.show();
+	}
+	
+	/**
+	 * Retrieves all teams asynchronously
+	 */
+	private class AllTeamsAsyncTask extends AsyncTask<TeamDAO, Object, List<BaseDTO>> {
+		@Override
+		protected List<BaseDTO> doInBackground(TeamDAO... params) {
+			// don't expect more than one DAO object
+			TeamDAO teamDAO = params[0];
+			return teamDAO.getTeams();
+		}
 	}
 }
