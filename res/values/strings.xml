@@ -31,5 +31,9 @@
     <string name="noTeams">No teams here.  Use settings menu to add a team.</string>
     <string name="addNewTeam">Add Team</string>
     <string name="removeTeam">Delete Team</string>
+    <string name="title_activity_edit_teams">Edit Teams</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="nameNotNullToastMessage">Name cannot be empty, the save did not occur.</string>
 
 </resources>

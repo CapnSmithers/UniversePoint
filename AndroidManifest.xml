@@ -31,6 +31,10 @@
             android:name="edu.mines.msmith1.universepoint.ScoreSummary"
             android:label="@string/title_activity_score_summary" >
         </activity>
+        <activity
+            android:name="edu.mines.msmith1.universepoint.EditTeams"
+            android:label="@string/title_activity_edit_teams" >
+        </activity>
     </application>
 
 </manifest>

@@ -20,4 +20,8 @@ public class Game extends BaseDTO {
 		this.team2 = team2;
 	}
 	
+	@Override
+	public String toString() {
+		return team1.getName() + " versus " + team2.getName();
+	}
 }

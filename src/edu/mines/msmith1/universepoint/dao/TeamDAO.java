@@ -1,10 +1,14 @@
 package edu.mines.msmith1.universepoint.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 import edu.mines.msmith1.universepoint.SQLiteHelper;
+import edu.mines.msmith1.universepoint.dto.BaseDTO;
 import edu.mines.msmith1.universepoint.dto.Team;
 
 public class TeamDAO extends BaseDAO {
@@ -33,6 +37,21 @@ public class TeamDAO extends BaseDAO {
 		String[] whereArgs = getWhereArgsWithId(team);
 		Log.d(LOG_TAG, "deleting team with id " + whereArgs[0]);
 		db.delete(SQLiteHelper.TABLE_TEAM, WHERE_SELECTION_FOR_ID, whereArgs);
+	}
+	
+	public List<BaseDTO> getTeams() {
+		List<BaseDTO> teams = new ArrayList<BaseDTO>();
+		
+		Cursor cursor = db.query(SQLiteHelper.TABLE_TEAM, columns, null, null, null, null, null);
+		cursor.moveToFirst();
+		while(!cursor.isAfterLast()) {
+			BaseDTO team = cursorToTeam(cursor);
+			teams.add(team);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		
+		return teams;
 	}
 	
 	public Team getTeamById(long id) {
