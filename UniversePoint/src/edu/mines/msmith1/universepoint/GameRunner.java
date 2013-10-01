@@ -77,13 +77,13 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 
 	@Override
 	protected void onPause() {
+		super.onPause();
 		Log.d("ON_PAUSE", "onPause called");
 
 	}
 
 	@Override
 	protected void onResume() {
-
 		super.onResume();
 	}
 
