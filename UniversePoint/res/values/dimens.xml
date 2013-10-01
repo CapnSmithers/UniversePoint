@@ -8,5 +8,6 @@
     <dimen name="scoreSize">40dp</dimen>
     <dimen name="scoreButtonMargin">15dp</dimen>
     <dimen name="textHeaderSize">20dp</dimen>
+    <dimen name="titleSize">20dp</dimen>
 
 </resources>

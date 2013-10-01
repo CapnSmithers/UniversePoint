@@ -35,8 +35,6 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scorekeeping);
 		
-		Bundle teamId = getIntent().getExtras();
-		
 		//Inflate player list fragment
 		if(findViewById(R.id.listContainer) != null) {
 			if (savedInstanceState != null) {

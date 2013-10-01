@@ -26,24 +26,6 @@ public class ScoreSummary extends Activity {
 		Intent prevIntent = getIntent();
 		Bundle b = prevIntent.getExtras();
 		
-		//Make sure that intent extras were received
-		if (b != null) {
-			//Pull values
-
-			//Set values for all of the score stuffs
-			TextView name1 = (TextView) findViewById(R.id.box_team1Name);
-			TextView name2 = (TextView) findViewById(R.id.box_team2Name);
-			TextView score1 = (TextView) findViewById(R.id.box_team1Score);
-			TextView score2 = (TextView) findViewById(R.id.box_team2Score);
-			TextView turns1 = (TextView) findViewById(R.id.box_team1Turns);
-			TextView turns2 = (TextView) findViewById(R.id.box_team2Turns);
-			
-			
-		} else {
-			//Don't set text -- something went wrong on the screen before
-			Toast.makeText(getApplicationContext(), getString(R.string.scoreLoadError), Toast.LENGTH_SHORT).show();
-		}
-		
 		
 	}
 
