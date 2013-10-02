@@ -1,10 +1,11 @@
 /**
  * Description: This class is the functionality behind the score-keeping screen.
- *   Provides methods to add/remove points and turnovers, in addition to saving
- *   information across onPause() and onStop() calls. Also provides navigation to
- *   the score summary screen via the Finish Game button.
+ *   Displays two fragments - one persistent fragment that shows the score for both teams,
+ *   and one dynamic fragment that switches between a list of players on team 1 and a screen
+ *   that displays current statistics on a selected player stored in the database.  This 
+ *   screen allows entry of stats and updates the score screen accordingly.  
  * 
- * @author Matt
+ * @author Matt Smith, Van Rice
  */
 
 package edu.mines.msmith1.universepoint;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class GameRunner extends Activity implements PlayerListFragment.ListItemSelectedListener {
 
@@ -77,12 +79,19 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 	protected void onResume() {
 		super.onResume();
 	}
-
+	
+	
+	/**
+	 * Method to take the user to the summary screen.  Accessed by pressing
+	 * the finish game button in the settings menu.
+	 */
 	private void finishGame() {
 		// TODO Auto-generated method stub
-		
+		Toast toast = Toast.makeText(this, R.string.noNotYet, Toast.LENGTH_SHORT);
+		toast.show();
 	}
-
+	
+	// Swaps fragments
 	@Override
 	public void listItemSelected(int position) {
 		// TODO Swap out player list fragment with player stats fragment

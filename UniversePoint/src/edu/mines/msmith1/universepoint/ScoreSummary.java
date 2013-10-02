@@ -1,10 +1,8 @@
 /**
  * Description: This class provides the functionality behind the score summary 
- *   screen.  It accepts variables from the NewGame class via the intent.putExtra()
- *   function, and sets the variables to the appropriate displays. Provides navigation
- *   to the main menu or the new game (score-keeping) screens. 
+ *   screen. Takes game id from GameRunner screen and displays total game results. 
  * 
- * @author Matt
+ * @author Matt Smith, Van Rice
  */
 package edu.mines.msmith1.universepoint;
 

@@ -1,16 +1,20 @@
 /**
  * Description: Main menu for Universe Point app.  Provides 
- *   navigation to score-keeping screen. Currently only has new game and exit 
- *   buttons - more options will be implemented. 
+ *   navigation to score-keeping screen, edit/view team screen,
+ *   and edit/view game screen. Currently only new game and edit/view
+ *   team buttons are functional. More options will be implemented in 
+ *   future releases. 
  *   
- * Usage: Used Nexus 4 emulator and Nexus 7 tablet to test.  Target API is 18  
+ * Usage: Used Nexus 4 emulator and Nexus 7 tablet to test.  Target API is 18,
+ * minimum API is 11.  
  * 
  * Documentation Statement: According to the Academic Honesty Policy outlined in the 
- *   course syllabus, I have been the sole author and debugger of this piece of 
- *   software. The only resources that I have used are developer.android.com and class 
- *   notes.
+ *   course syllabus, we have been the sole authors and debuggers of this piece of 
+ *   software. The only resources that I have used are developer.android.com, class 
+ *   notes, and internet resources such as stackoverflow.com for troubleshooting purposes.
+ *   No code has been copied or stolen.
  * 
- * @author Matthew Smith
+ * @author Matthew Smith, Vander Rice
  */
 package edu.mines.msmith1.universepoint;
 
@@ -43,6 +47,13 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	
+	/**
+	 * Called when the Edit/View Teams button is pressed. Navigates
+	 * user to the EditTeams class screen
+	 * 
+	 * @param view - Edit/View teams button
+	 */
 	public void createTeam(View view) {
 		Log.d("EDIT TEAMS", "Edit team button pressed");
 		
@@ -51,6 +62,14 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	/**
+	 * Called when the view/edit games button is pressed. Navigates
+	 * user to ViewGames class screen
+	 * 
+	 * TODO: implement ViewGames class
+	 * 
+	 * @param view - edit/view games button
+	 */
 	public void viewGames(View view) {
 		Toast toast = Toast.makeText(this, R.string.noNotYet, Toast.LENGTH_SHORT);
 		toast.show();

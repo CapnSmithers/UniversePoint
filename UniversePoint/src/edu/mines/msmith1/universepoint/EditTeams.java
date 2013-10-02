@@ -1,3 +1,12 @@
+/**
+ * Description: This class is a list of the teams listed in the database.
+ * Clicking on a team will take you to a list of all of the players on that
+ * team.  The list of teams can be edited to add or remove teams by using the
+ * settings menu to add a team and long-pressing a team name to remove it.  
+ * 
+ * @author Matt Smith, Van Rice
+ *
+ */
 package edu.mines.msmith1.universepoint;
 
 import java.util.List;
@@ -116,7 +125,8 @@ public class EditTeams extends ListActivity {
 	
 	/**
 	 * Creates a new {@link Team} and persists to the database. Refreshes view.
-	 * @param teamName
+	 * 
+	 * @param teamName - User-enetered string to display as team name
 	 */
 	private void addTeam(String teamName) {
 		Team team = new Team();
@@ -136,6 +146,8 @@ public class EditTeams extends ListActivity {
 	
 	/**
 	 * Creates a {@link AlertDialog} to prompt user to delete the selected team.
+	 * 
+	 * @param team - Team to be deleted, selected by long-press
 	 */
 	private void promptUserToDeleteTeam(final BaseDTO team) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -164,7 +176,8 @@ public class EditTeams extends ListActivity {
 	
 	/**
 	 * Deletes the team from the database and refreshes view
-	 * @param team to be removed from database
+	 * 
+	 * @param team - to be removed from database
 	 */
 	private void removeTeam(Team team) {
 		mTeamAdapter.remove(team);

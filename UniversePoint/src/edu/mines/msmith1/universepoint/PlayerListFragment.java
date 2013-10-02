@@ -1,3 +1,10 @@
+/**
+ * Description: Fragment to display a list of players on Team 1 from the GameRunner screen.
+ * Allows for selection of player to take user to player stat screen.  Part of the Dynamic UI
+ * on the GameRunner screen.
+ * 
+ * @author Matt Smith, Van Rice
+ */
 package edu.mines.msmith1.universepoint;
 
 import android.app.Activity;
@@ -11,6 +18,10 @@ import android.widget.ListView;
 public class PlayerListFragment extends ListFragment {
 	ListItemSelectedListener playerSelectedListener;
 	
+	
+	/**
+	 * Interface to allow list item selection
+	 */
 	public interface ListItemSelectedListener {
 		public void listItemSelected(int position);
 	}

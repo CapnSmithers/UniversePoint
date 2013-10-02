@@ -1,13 +1,14 @@
+/**
+ * Description: Handles database creation. Enables foreign keys for all database operations.
+ * 
+ * @author Van Rice, Matt Smith
+ */
 package edu.mines.msmith1.universepoint;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-/**
- * Handles database creation. Enables foreign keys for all database operations.
- * @author vanxrice
- */
 public class SQLiteHelper extends SQLiteOpenHelper {
 	public static final String TABLE_PLAYER = "player";
 	public static final String TABLE_TEAM = "team";

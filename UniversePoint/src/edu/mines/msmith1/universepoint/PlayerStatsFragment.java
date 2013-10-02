@@ -1,3 +1,12 @@
+/**
+ * Description: Dynamic fragment to display individual player stats.
+ * Loaded onto the GameRunner screen when a player is selected from 
+ * PlayerListFragment. Pressing the back button will take the user
+ * back to the player list.
+ * 
+ * @author Matt Smith, Van Rice
+ *
+ */
 package edu.mines.msmith1.universepoint;
 
 import android.app.Fragment;
