@@ -35,6 +35,11 @@
             android:name="edu.mines.msmith1.universepoint.EditTeams"
             android:label="@string/title_activity_edit_teams" >
         </activity>
+        <activity
+            android:name="edu.mines.msmith1.universepoint.EditPlayers"
+            android:label="@string/title_activity_edit_players" >
+        </activity>
+        
     </application>
 
 </manifest>

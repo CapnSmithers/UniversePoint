@@ -14,6 +14,7 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
@@ -32,23 +33,31 @@ import edu.mines.msmith1.universepoint.dto.Team;
 
 public class EditTeams extends ListActivity {
 	public static final int ADD_TEAM_ID = 1;
+	public static final String EXTRA_TEAM_ID = "edu.mines.msmith1.unviersepoint.TEAM_ID";
 	private BaseDTOArrayAdapter mTeamAdapter;
 	private TeamDAO mTeamDAO;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.team_list);
+		setContentView(R.layout.edit_list);
 		
 		mTeamDAO = new TeamDAO(this);
 		
 		ListView listView = getListView();
 		// create long click listener to prompt user to delete the team
-		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() { // TODO need to make list_item view span the width of the screen so it's easier to long click
+		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 				promptUserToDeleteTeam(mTeamAdapter.getItem(position));
 				return true;
+			}
+		});
+		// create click listener to prompt user to launch edit player intent
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				beginEditPlayersActivity((Team) mTeamAdapter.getItem(position));
 			}
 		});
 	}
@@ -87,6 +96,16 @@ public class EditTeams extends ListActivity {
 		super.onPause();
 		
 		mTeamDAO.close();
+	}
+	
+	/**
+	 * Launches {@link EditPlayers} and passes the _id to query for players
+	 * @param team
+	 */
+	private void beginEditPlayersActivity(Team team) {
+		Intent intent = new Intent(this, EditPlayers.class);
+		intent.putExtra(EXTRA_TEAM_ID, team.getId());
+		startActivity(intent);
 	}
 	
 	/**

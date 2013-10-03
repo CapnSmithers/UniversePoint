@@ -8,7 +8,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 import edu.mines.msmith1.universepoint.SQLiteHelper;
+import edu.mines.msmith1.universepoint.dto.BaseDTO;
 import edu.mines.msmith1.universepoint.dto.Player;
+import edu.mines.msmith1.universepoint.dto.Team;
 
 /**
  * DAO for {@link Player} table. Eager fetches {@link Team} objects.
@@ -59,8 +61,8 @@ public class PlayerDAO extends BaseDAO {
 	/**
 	 * @return all players
 	 */
-	public List<Player> getPlayers() {
-		List<Player> players = new ArrayList<Player>();
+	public List<BaseDTO> getPlayers() {
+		List<BaseDTO> players = new ArrayList<BaseDTO>();
 		
 		Cursor cursor = db.query(SQLiteHelper.TABLE_PLAYER, columns, null, null, null, null, null);
 		cursor.moveToFirst();
@@ -86,6 +88,24 @@ public class PlayerDAO extends BaseDAO {
 		Player player = cursorToPlayer(cursor);
 		cursor.close();
 		return player;
+	}
+	
+	/**
+	 * @param team
+	 * @return all players associated with team
+	 */
+	public List<BaseDTO> getPlayersByTeam(Team team) {
+		List<BaseDTO> players = new ArrayList<BaseDTO>();
+		String[] whereArgs = getWhereArgsWithId(team);
+		Cursor cursor = db.query(SQLiteHelper.TABLE_PLAYER, columns, "team_id = ?", whereArgs,
+				null, null, null);
+		cursor.moveToFirst();
+		while(!cursor.isAfterLast()) {
+			players.add(cursorToPlayer(cursor));
+			cursor.moveToNext();
+		}
+		cursor.close();
+		return players;
 	}
 	
 	/**
