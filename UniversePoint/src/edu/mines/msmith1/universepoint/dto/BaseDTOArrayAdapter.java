@@ -2,14 +2,13 @@ package edu.mines.msmith1.universepoint.dto;
 
 import java.util.List;
 
-import edu.mines.msmith1.universepoint.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import edu.mines.msmith1.universepoint.R;
 
 /**
  * An {@link ArrayAdapter} that handles DTO objects generically by populating a {@link TextView}
@@ -42,6 +41,8 @@ public class BaseDTOArrayAdapter extends ArrayAdapter<BaseDTO> {
 			TextView textView = (TextView) rowView.findViewById(R.id.label);
 			if (textView != null) {
 				textView.setText(item.toString());
+				// programatically set the width to the parent view
+				textView.setWidth(parent.getWidth());
 			}
 		}
 		
