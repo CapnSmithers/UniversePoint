@@ -4,10 +4,10 @@ import org.junit.Test;
 
 import edu.mines.msmith1.universepoint.SQLiteHelper;
 import edu.mines.msmith1.universepoint.dao.PlayerDAO;
-import edu.mines.msmith1.universepoint.dao.TeamDAO;
 import edu.mines.msmith1.universepoint.dto.Player;
 import edu.mines.msmith1.universepoint.dto.Team;
 import edu.mines.msmith1.universepoint.test.DatabaseBaseTest;
+import edu.mines.msmith1.universepoint.test.util.DatabaseUtil;
 
 public class PlayerDAOTest extends DatabaseBaseTest {
 	PlayerDAO playerDAO;
@@ -22,12 +22,7 @@ public class PlayerDAOTest extends DatabaseBaseTest {
 		playerDAO.open();
 		
 		// add team to db
-		team = new Team();
-		team.setName("Test Team");
-		TeamDAO teamDAO = new TeamDAO(context);
-		teamDAO.open();
-		team = teamDAO.createTeam(team);
-		teamDAO.close();
+		team = DatabaseUtil.addTeamToDatabase(context, "Test Team");
 		
 		player = new Player();
 		player.setName("Test Person");
