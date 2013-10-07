@@ -33,7 +33,6 @@
     <string name="cancel">Cancel</string>
     <string name="nameNotNullToastMessage">Name cannot be empty, the save did not occur.</string>
     <string name="oops">There doesn\'t appear to be anything here</string>
-    <string name="playerName">Player</string>
     <string name="addButton">+</string>
     <string name="removeButton">-</string>
     <string name="turnsTitle">Turnovers</string>
@@ -44,5 +43,7 @@
     <string name="removePlayerMsg">Are you sure you want to delete this player?</string>
     <string name="title_activity_edit_players">Edit Players</string>
     <string name="addNewPlayer">New Player</string>
+    <string name="playerName">Player Name</string>
+    <string name="title_activity_player_view">Player View</string>
 
 </resources>

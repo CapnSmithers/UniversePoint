@@ -39,7 +39,10 @@
             android:name="edu.mines.msmith1.universepoint.EditPlayers"
             android:label="@string/title_activity_edit_players" >
         </activity>
-        
+        <activity
+            android:name="edu.mines.msmith1.universepoint.PlayerView"
+            android:label="@string/title_activity_player_view" >
+        </activity>
     </application>
 
 </manifest>

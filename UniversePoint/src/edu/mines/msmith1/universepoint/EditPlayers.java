@@ -26,6 +26,7 @@ import edu.mines.msmith1.universepoint.dto.Team;
 
 public class EditPlayers extends ListActivity {
 	public static final int ADD_PLAYER_ID = 1;
+	public static final String EXTRA_PLAYER_ID = "edu.mines.msmith1.universepoint.PLAYER_ID";
 	
 	private Team mTeam;
 	private BaseDTOArrayAdapter mPlayerAdapter;
@@ -55,6 +56,14 @@ public class EditPlayers extends ListActivity {
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 				promptUserToDeletePlayer((Player) mPlayerAdapter.getItem(position));
 				return true;
+			}
+		});
+		
+		// create click listener to prompt user to launch edit player intent
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				beginPlayerViewActivity((Player) mPlayerAdapter.getItem(position));
 			}
 		});
 	}
@@ -93,6 +102,16 @@ public class EditPlayers extends ListActivity {
 		super.onPause();
 	
 		mPlayerDAO.close();
+	}
+	
+	/**
+	 * Launches {@link PlayerView} and passes the _id to query for players
+	 * @param player
+	 */
+	private void beginPlayerViewActivity(Player player) {
+		Intent intent = new Intent(this, PlayerView.class);
+		intent.putExtra(EXTRA_PLAYER_ID, player.getId());
+		startActivity(intent);
 	}
 	
 	/**
