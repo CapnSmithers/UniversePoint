@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/playerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/playerName"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout android:id="@+id/scoreLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/scoresTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/playerViewTextPad"
+            android:paddingRight="10dp"
+            android:text="@string/scoresTitle" />
+
+        <TextView
+            android:id="@+id/scoresValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/playerViewTextPad"
+            android:text="@string/nullValue" />
+        
+        <Button android:id="@+id/addScore"
+            android:layout_width="@dimen/androidStdSize"
+            android:layout_height="wrap_content"
+            android:text="@string/addButton"
+            android:onClick="addStat" />
+        
+        <Button android:id="@+id/removeScore"
+            android:layout_width="@dimen/androidStdSize"
+            android:layout_height="wrap_content"
+            android:text="@string/removeButton"
+            android:onClick="removeStat" />
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/assistsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/assistsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/playerViewTextPad"
+            android:paddingRight="10dp"
+            android:text="@string/assistsTitle" />
+
+        <TextView
+            android:id="@+id/assistsValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/playerViewTextPad"
+            android:text="@string/nullValue" />
+
+        <Button android:id="@+id/addAssist"
+            android:layout_width="@dimen/androidStdSize"
+            android:layout_height="wrap_content"
+            android:text="@string/addButton"
+            android:onClick="addStat" />
+        
+        <Button android:id="@+id/removeAssist"
+            android:layout_width="@dimen/androidStdSize"
+            android:layout_height="wrap_content"
+            android:text="@string/removeButton"
+            android:onClick="removeStat" />
+        
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/turnsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/turnsTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/playerViewTextPad"
+            android:paddingRight="10dp"
+            android:text="@string/turnsTitle" />
+
+        <TextView
+            android:id="@+id/turnsValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/playerViewTextPad"
+            android:text="@string/nullValue" />
+        
+        <Button android:id="@+id/addTurn"
+            android:layout_width="@dimen/androidStdSize"
+            android:layout_height="wrap_content"
+            android:text="@string/addButton"
+            android:onClick="addStat" />
+        
+        <Button android:id="@+id/removeTurn"
+            android:layout_width="@dimen/androidStdSize"
+            android:layout_height="wrap_content"
+            android:text="@string/removeButton"
+            android:onClick="removeStat" />
+
+    </LinearLayout>
+
+</LinearLayout>

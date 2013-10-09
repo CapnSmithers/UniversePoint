@@ -10,5 +10,6 @@
     <dimen name="textHeaderSize">20dp</dimen>
     <dimen name="titleSize">20dp</dimen>
     <dimen name="playerViewTextPad">5dp</dimen>
+    <dimen name="androidStdSize">48dp</dimen>
 
 </resources>
