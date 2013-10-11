@@ -31,7 +31,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 	private static final String CREATE_TABLE_TEAM = "create table " + TABLE_TEAM + " (" + COLUMN_ID_CREATE_STMT + "name TEXT NOT NULL);";
 	private static final String CREATE_TABLE_PLAYER = "create table " + TABLE_PLAYER + " (" + COLUMN_ID_CREATE_STMT +"name TEXT NOT NULL, team_id INTEGER NOT NULL, FOREIGN KEY(team_id) REFERENCES team(_id));";
 	private static final String CREATE_TABLE_GAME = "create table " + TABLE_GAME + " (" + COLUMN_ID_CREATE_STMT + "team_1_id INTEGER NOT NULL, team_2_id INTEGER NOT NULL, FOREIGN KEY(team_1_id) REFERENCES team(_id), FOREIGN KEY(team_2_id) REFERENCES team(_id))";
-	private static final String CREATE_TABLE_OFFENSIVE_STAT = "create table " + TABLE_OFFENSIVE_STAT + " (" + COLUMN_ID_CREATE_STMT + "game_id INTEGER NOT NULL, player_id INTEGER NOT NULL, assisting_player_id INTEGER, FOREIGN KEY(game_id) REFERENCES game(_id), FOREIGN KEY(player_id) REFERENCES player(_id), FOREIGN KEY(assisting_player_id) REFERENCES player(_id));";
+	private static final String CREATE_TABLE_OFFENSIVE_STAT = "create table " + TABLE_OFFENSIVE_STAT + " (" + COLUMN_ID_CREATE_STMT + "game_id INTEGER NOT NULL, team_id INTEGER NOT NULL, player_id INTEGER, assisting_player_id INTEGER, FOREIGN KEY(game_id) REFERENCES game(_id), FOREIGN KEY(team_id) REFERENCES team(_id), FOREIGN KEY(player_id) REFERENCES player(_id), FOREIGN KEY(assisting_player_id) REFERENCES player(_id));";
 
 	private static final String DATABASE_NAME = "universePoint.db";
 	private static final int DATABASE_VERSION = 1;

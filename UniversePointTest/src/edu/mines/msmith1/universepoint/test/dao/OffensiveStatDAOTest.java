@@ -42,6 +42,7 @@ public class OffensiveStatDAOTest extends DatabaseBaseTest {
 		// create offensive stat
 		offensiveStat = new OffensiveStat();
 		offensiveStat.setGame(game);
+		offensiveStat.setTeam(team1);
 		offensiveStat.setPlayer(player);
 		offensiveStat.setAssistingPlayer(assistingPlayer);
 	}
@@ -82,6 +83,34 @@ public class OffensiveStatDAOTest extends DatabaseBaseTest {
 		offensiveStatDAO.deleteOffensiveStat(result);
 		OffensiveStat deleted = offensiveStatDAO.getOffensiveStatById(result.getId());
 		assertNull(deleted);
+	}
+	
+	@Test
+	public void testGetAllOffensiveStatsForPlayer() {
+		offensiveStatDAO.createOffensiveStat(offensiveStat);
+		offensiveStatDAO.createOffensiveStat(offensiveStat);
+		List<OffensiveStat> result = offensiveStatDAO.getAllOffensiveStatsForPlayer(player);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+	}
+	
+	@Test
+	public void testGetScoreForTeam() {
+		OffensiveStat stat1 = offensiveStatDAO.createOffensiveStat(offensiveStat);
+		List<OffensiveStat> result = offensiveStatDAO.getScoreForTeam(team1, game);
+		assertEquals(1, result.size());
+		assertEquals(stat1.getId(), result.get(0).getId());
+		assertEquals(team1.getId(), result.get(0).getTeam().getId());
+	}
+	
+	@Test
+	public void testInsertOffensiveStatWithoutPlayer() {
+		OffensiveStat anonOffensiveStat = offensiveStat;
+		anonOffensiveStat.setPlayer(null);
+		anonOffensiveStat.setAssistingPlayer(null);
+		OffensiveStat result = offensiveStatDAO.createOffensiveStat(anonOffensiveStat);
+		assertNotNull(result);
+		assertNull(result.getPlayer());
 	}
 	
 	@Override
