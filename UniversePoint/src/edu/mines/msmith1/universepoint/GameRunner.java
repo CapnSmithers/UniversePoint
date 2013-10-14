@@ -33,7 +33,7 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 		Intent intent = getIntent();
 		Long teamId = intent.getLongExtra(EditTeams.EXTRA_TEAM_ID, 0);
 		
-		//Set Team 1 name based on id
+		//Set Team 1 based on id
 		
 		
 		//Inflate player list fragment
@@ -103,6 +103,7 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 	@Override
 	public void listItemSelected(int position) {
 		// TODO Swap out player list fragment with player stats fragment
+		
 		
 	}
 	
