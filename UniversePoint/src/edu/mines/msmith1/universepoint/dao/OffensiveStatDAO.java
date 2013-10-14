@@ -24,7 +24,8 @@ public class OffensiveStatDAO extends BaseDAO {
 			SQLiteHelper.COLUMN_GAME_ID,
 			SQLiteHelper.COLUMN_TEAM_ID,
 			SQLiteHelper.COLUMN_PLAYER_ID,
-			SQLiteHelper.COLUMN_ASSISTING_PLAYER_ID};
+			SQLiteHelper.COLUMN_ASSISTING_PLAYER_ID,
+			SQLiteHelper.COLUMN_TURNOVER_PLAYER_ID}; // shouldn't have removed the offensive_stat_type_ref table
 	private GameDAO gameDAO;
 	private PlayerDAO playerDAO;
 	private TeamDAO teamDAO;
@@ -87,12 +88,38 @@ public class OffensiveStatDAO extends BaseDAO {
 	
 	/**
 	 * @param player
-	 * @return List of all OffensiveStat for the player
+	 * @return List of all OffensiveStat where the player scored a point
 	 */
-	public List<OffensiveStat> getAllOffensiveStatsForPlayer(Player player) {
+	public List<OffensiveStat> getAllPointsForPlayer(Player player) {
+		return getAllOffensiveStatForPlayer(player, SQLiteHelper.COLUMN_PLAYER_ID + " = ?");
+	}
+	
+	/**
+	 * @param player
+	 * @return List of all OffensiveStat where the player has an assist
+	 */
+	public List<OffensiveStat> getAllAssistsForPlayer(Player player) {
+		return getAllOffensiveStatForPlayer(player, SQLiteHelper.COLUMN_ASSISTING_PLAYER_ID +" = ?");
+	}
+	
+	/**
+	 * @param player
+	 * @return List of all OffensiveStat where the player has a turnover
+	 */
+	public List<OffensiveStat> getAllTurnoversForPlayer(Player player) {
+		return getAllOffensiveStatForPlayer(player, SQLiteHelper.COLUMN_TURNOVER_PLAYER_ID + " = ?");
+	}
+	
+	/**
+	 * Helper method to getAll*ForPlayer queries
+	 * @param player
+	 * @param whereClause
+	 * @return
+	 */
+	private List<OffensiveStat> getAllOffensiveStatForPlayer(Player player, String whereClause) {
 		List<OffensiveStat> offensiveStats = new ArrayList<OffensiveStat>();
 		String[] whereArgs = {String.valueOf(player.getId())};
-		Cursor cursor = db.query(SQLiteHelper.TABLE_OFFENSIVE_STAT, columns, "player_id = ?",
+		Cursor cursor = db.query(SQLiteHelper.TABLE_OFFENSIVE_STAT, columns, whereClause,
 				whereArgs, null, null, null);
 		cursor.moveToFirst();
 		while(!cursor.isAfterLast()) {
@@ -108,7 +135,7 @@ public class OffensiveStatDAO extends BaseDAO {
 	 * @param game
 	 * @return List of OffensiveStat for the team and game
 	 */
-	public List<OffensiveStat> getScoreForTeam(Team team, Game game) {
+	public List<OffensiveStat> getOffensiveStatsForTeam(Team team, Game game) {
 		List<OffensiveStat> offensiveStats = new ArrayList<OffensiveStat>();
 		String[] whereArgs = {String.valueOf(team.getId()), String.valueOf(game.getId())};
 		Cursor cursor = db.query(SQLiteHelper.TABLE_OFFENSIVE_STAT, columns, "game_id = ? AND team_id = ?",
@@ -145,6 +172,12 @@ public class OffensiveStatDAO extends BaseDAO {
 				offensiveStat.setAssistingPlayer(playerDAO.getPlayerById(assistingPlayerId));
 			else
 				offensiveStat.setAssistingPlayer(null);
+			
+			Long turnoverPlayerId = cursor.getLong(5);
+			if (turnoverPlayerId != null)
+				offensiveStat.setTurnoverPlayer(playerDAO.getPlayerById(turnoverPlayerId));
+			else
+				offensiveStat.setTurnoverPlayer(null);
 		}
 		return offensiveStat;
 	}
@@ -162,6 +195,8 @@ public class OffensiveStatDAO extends BaseDAO {
 			values.put(SQLiteHelper.COLUMN_PLAYER_ID, offensiveStat.getPlayer().getId());
 		if (offensiveStat.getAssistingPlayer() != null)
 			values.put(SQLiteHelper.COLUMN_ASSISTING_PLAYER_ID, offensiveStat.getAssistingPlayer().getId());
+		if (offensiveStat.getTurnoverPlayer() != null)
+			values.put(SQLiteHelper.COLUMN_TURNOVER_PLAYER_ID, offensiveStat.getTurnoverPlayer().getId());
 		return values;
 	}
 	

@@ -7,7 +7,7 @@ package edu.mines.msmith1.universepoint.dto;
  */
 public class OffensiveStat extends BaseDTO {
 	private Game game;
-	private Player player, assistingPlayer;
+	private Player player, assistingPlayer, turnoverPlayer;
 	private Team team;
 
 	public Game getGame() {
@@ -40,6 +40,14 @@ public class OffensiveStat extends BaseDTO {
 
 	public void setTeam(Team team) {
 		this.team = team;
+	}
+
+	public Player getTurnoverPlayer() {
+		return turnoverPlayer;
+	}
+
+	public void setTurnoverPlayer(Player turnoverPlayer) {
+		this.turnoverPlayer = turnoverPlayer;
 	}
 
 	@Override
