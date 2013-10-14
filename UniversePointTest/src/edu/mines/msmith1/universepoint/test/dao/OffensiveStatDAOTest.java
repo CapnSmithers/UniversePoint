@@ -19,7 +19,7 @@ public class OffensiveStatDAOTest extends DatabaseBaseTest {
 	OffensiveStat offensiveStat;
 	Game game;
 	Team team1, team2;
-	Player player, assistingPlayer;
+	Player player, assistingPlayer, turnoverPlayer;
 	
 	@Override
 	public void setUp() throws Exception {
@@ -38,6 +38,7 @@ public class OffensiveStatDAOTest extends DatabaseBaseTest {
 		// add players
 		player = DatabaseUtil.addPlayerToDatabase(context, "Player 1", team1);
 		assistingPlayer = DatabaseUtil.addPlayerToDatabase(context, "Player 2", team1);
+		turnoverPlayer = DatabaseUtil.addPlayerToDatabase(context, "Turnover Player", team2);
 		
 		// create offensive stat
 		offensiveStat = new OffensiveStat();
@@ -45,6 +46,7 @@ public class OffensiveStatDAOTest extends DatabaseBaseTest {
 		offensiveStat.setTeam(team1);
 		offensiveStat.setPlayer(player);
 		offensiveStat.setAssistingPlayer(assistingPlayer);
+		offensiveStat.setTurnoverPlayer(turnoverPlayer);
 	}
 	
 	@Test
@@ -86,10 +88,10 @@ public class OffensiveStatDAOTest extends DatabaseBaseTest {
 	}
 	
 	@Test
-	public void testGetAllOffensiveStatsForPlayer() {
+	public void testGetAllPointsForPlayer() {
 		offensiveStatDAO.createOffensiveStat(offensiveStat);
 		offensiveStatDAO.createOffensiveStat(offensiveStat);
-		List<OffensiveStat> result = offensiveStatDAO.getAllOffensiveStatsForPlayer(player);
+		List<OffensiveStat> result = offensiveStatDAO.getAllPointsForPlayer(player);
 		assertNotNull(result);
 		assertEquals(2, result.size());
 	}
@@ -97,7 +99,7 @@ public class OffensiveStatDAOTest extends DatabaseBaseTest {
 	@Test
 	public void testGetScoreForTeam() {
 		OffensiveStat stat1 = offensiveStatDAO.createOffensiveStat(offensiveStat);
-		List<OffensiveStat> result = offensiveStatDAO.getScoreForTeam(team1, game);
+		List<OffensiveStat> result = offensiveStatDAO.getOffensiveStatsForTeam(team1, game);
 		assertEquals(1, result.size());
 		assertEquals(stat1.getId(), result.get(0).getId());
 		assertEquals(team1.getId(), result.get(0).getTeam().getId());
@@ -111,6 +113,24 @@ public class OffensiveStatDAOTest extends DatabaseBaseTest {
 		OffensiveStat result = offensiveStatDAO.createOffensiveStat(anonOffensiveStat);
 		assertNotNull(result);
 		assertNull(result.getPlayer());
+	}
+	
+	@Test
+	public void testGetAssistsForPlayer() {
+		offensiveStatDAO.createOffensiveStat(offensiveStat);
+		offensiveStatDAO.createOffensiveStat(offensiveStat);
+		List<OffensiveStat> result = offensiveStatDAO.getAllAssistsForPlayer(assistingPlayer);
+		assertNotNull(result);
+		assertEquals(2, result.size());
+	}
+	
+	@Test
+	public void testGetTurnoversForPlayer() {
+		offensiveStatDAO.createOffensiveStat(offensiveStat);
+		offensiveStatDAO.createOffensiveStat(offensiveStat);
+		List<OffensiveStat> result = offensiveStatDAO.getAllTurnoversForPlayer(turnoverPlayer);
+		assertNotNull(result);
+		assertEquals(2, result.size());
 	}
 	
 	@Override

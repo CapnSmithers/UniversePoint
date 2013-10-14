@@ -14,6 +14,7 @@ public class PlayerEdit extends Activity {
 //									R.id.removeAssist,
 //									R.id.removeTurn };
 	
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.player_edit);

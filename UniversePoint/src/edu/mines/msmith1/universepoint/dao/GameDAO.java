@@ -21,7 +21,6 @@ public class GameDAO extends BaseDAO {
 		super(context);
 		
 		teamDAO = new TeamDAO(context);
-		teamDAO.open();
 	}
 	
 	/**
@@ -92,6 +91,12 @@ public class GameDAO extends BaseDAO {
 		values.put(SQLiteHelper.COLUMN_TEAM_1_ID, game.getTeam1().getId());
 		values.put(SQLiteHelper.COLUMN_TEAM_2_ID, game.getTeam2().getId());
 		return values;
+	}
+	
+	@Override
+	public void open() {
+		super.open();
+		teamDAO.open();
 	}
 	
 	@Override
