@@ -23,4 +23,8 @@ public class ScoreDisplayFragment extends Fragment {
 
 	}
 	
+	public void updateScore() {
+		// Increment or decrement score accordingly
+	}
+	
 }

@@ -8,7 +8,7 @@
     <string name="title_activity_new_game_menu">NewGameMenu</string>
     <string name="title_activity_new_game">NewGame</string>
     <string name="team1">Team 1</string>
-    <string name="team2">Team 2</string>
+    <string name="team2">Bad Guys</string>
     <string name="filler">Fill</string>
     <string name="finishGame">Finish Game</string>
     <string name="hello_world">Hello world!</string>
@@ -45,5 +45,6 @@
     <string name="addNewPlayer">New Player</string>
     <string name="playerName">Player Name</string>
     <string name="title_activity_player_view">Player View</string>
+    <string name="teamSelect">Select Team</string>
 
 </resources>

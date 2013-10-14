@@ -23,7 +23,7 @@ public class PlayerEdit extends Activity {
 	public void addStat(View addButton) {
 		switch(addButton.getId()) {
 			case (R.id.addScore):
-				//Increment scores
+				//Increment scores, update score display fragment
 				break;
 			case (R.id.addAssist):
 				//Increment assist
@@ -40,7 +40,7 @@ public class PlayerEdit extends Activity {
 	public void removeStat(View removeButton) {
 		switch(removeButton.getId()) {
 			case (R.id.removeScore):
-				//Decrement scores
+				//Decrement scores, update score display fragment
 				break;
 			case (R.id.removeAssist):
 				//Decrement assist

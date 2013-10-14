@@ -19,6 +19,7 @@
 package edu.mines.msmith1.universepoint;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,7 +36,8 @@ public class MainActivity extends Activity {
 
 	/**
 	 * Called when New Game button is pressed on main menu screen.
-	 * Takes user to scorekeeping screen
+	 * Opens dialog to select team.  Selecting team takes user to 
+	 * the scorekeeping screen
 	 * 
 	 * @param view - new game button
 	 */
@@ -43,8 +45,9 @@ public class MainActivity extends Activity {
 		Log.d("NEWGAME","New game created");
 		
 		//Create new game dialog screen
-		Intent intent = new Intent(this, GameRunner.class);
-		startActivity(intent);
+		DialogFragment teamSelect = new TeamSelectDialog();
+		teamSelect.show(getFragmentManager(), "TeamSelectDialog");
+		
 	}
 	
 	
@@ -74,4 +77,5 @@ public class MainActivity extends Activity {
 		Toast toast = Toast.makeText(this, R.string.noNotYet, Toast.LENGTH_SHORT);
 		toast.show();
 	}
+
 }

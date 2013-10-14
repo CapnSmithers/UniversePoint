@@ -12,6 +12,7 @@ package edu.mines.msmith1.universepoint;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -27,6 +28,13 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scorekeeping);
+		
+		//Grab team id
+		Intent intent = getIntent();
+		Long teamId = intent.getLongExtra(EditTeams.EXTRA_TEAM_ID, 0);
+		
+		//Set Team 1 name based on id
+		
 		
 		//Inflate player list fragment
 		if(findViewById(R.id.listContainer) != null) {
