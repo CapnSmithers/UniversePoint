@@ -15,7 +15,6 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
@@ -201,17 +200,5 @@ public class EditTeams extends ListActivity {
 	private void removeTeam(Team team) {
 		mTeamAdapter.remove(team);
 		mTeamDAO.deleteTeam(team);
-	}
-	
-	/**
-	 * Retrieves all teams asynchronously
-	 */
-	private class AllTeamsAsyncTask extends AsyncTask<TeamDAO, Object, List<BaseDTO>> {
-		@Override
-		protected List<BaseDTO> doInBackground(TeamDAO... params) {
-			// don't expect more than one DAO object
-			TeamDAO teamDAO = params[0];
-			return teamDAO.getTeams();
-		}
 	}
 }
