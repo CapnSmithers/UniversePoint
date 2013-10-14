@@ -2,19 +2,20 @@ package edu.mines.msmith1.universepoint;
 
 import java.util.List;
 
-import edu.mines.msmith1.universepoint.dao.TeamDAO;
-import edu.mines.msmith1.universepoint.dto.BaseDTO;
-import edu.mines.msmith1.universepoint.dto.BaseDTOArrayAdapter;
-import edu.mines.msmith1.universepoint.dto.Team;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import edu.mines.msmith1.universepoint.dao.TeamDAO;
+import edu.mines.msmith1.universepoint.dto.BaseDTO;
+import edu.mines.msmith1.universepoint.dto.BaseDTOArrayAdapter;
+import edu.mines.msmith1.universepoint.dto.Team;
 
 public class TeamSelectDialog extends DialogFragment {
+	private static final String EXTRA_DEFAULT_TEAM_2_ID = "edu.mines.msmith1.universepoint";
+	private static final int DEFAULT_TEAM_2_ID = 1; // default team is created when the app is first started
 	
 	// Team Id to pass back to MainActivity
 	private BaseDTOArrayAdapter mTeamAdapter;
@@ -43,21 +44,10 @@ public class TeamSelectDialog extends DialogFragment {
 		return builder.create();
 	}
 	
-	/**
-	 * Retrieves all teams asynchronously
-	 */
-	private class AllTeamsAsyncTask extends AsyncTask<TeamDAO, Object, List<BaseDTO>> {
-		@Override
-		protected List<BaseDTO> doInBackground(TeamDAO... params) {
-			// don't expect more than one DAO object
-			TeamDAO teamDAO = params[0];
-			return teamDAO.getTeams();
-		}
-	}
-	
 	private void beginGameRunnerActivity(Team team) {
 		Intent intent = new Intent(getActivity(), GameRunner.class);
 		intent.putExtra(EditTeams.EXTRA_TEAM_ID, team.getId());
+		intent.putExtra(EXTRA_DEFAULT_TEAM_2_ID, DEFAULT_TEAM_2_ID);
 		startActivity(intent);
 	}
 	
