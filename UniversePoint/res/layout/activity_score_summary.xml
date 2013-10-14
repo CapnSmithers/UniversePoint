@@ -9,4 +9,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ScoreSummary" >
 
+    <LinearLayout 
+        android:id="@+id/scoreContainer"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp" >
+	
+        <fragment android:name="edu.mines.msmith1.universepoint.ScoreDisplayFragment"
+	        android:id="@+id/scoreDisplayFragment"
+	        android:layout_height="match_parent"
+	        android:layout_width="match_parent" />
+	
+	</LinearLayout>
+    
 </LinearLayout>

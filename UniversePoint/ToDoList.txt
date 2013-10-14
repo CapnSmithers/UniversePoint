@@ -4,5 +4,9 @@ Ideas to implement:
 - Dynamic UI for score input
 
 TODO:
-- Allow for switching between player list fragment and player status fragment on scorekeeping screen
-- Make database calls to populate lists`
+- Fix player view screen (back button causes crash)
+- Get player stats from database on player view screen
+- Implement saved game viewing (not critical - can get rid of if we need)
+- Populate player list on score-keeping screen
+- Allow for updating of player/game info on scorekeeping screen (PlayerEdit class)
+- Put up game summary screen

@@ -7,12 +7,12 @@ import android.widget.Toast;
 
 public class PlayerEdit extends Activity {
 	
-	private int idDictionary[] = { R.id.addScore,
-									R.id.addAssist,
-									R.id.addTurn,
-									R.id.removeScore,
-									R.id.removeAssist,
-									R.id.removeTurn };
+//	private int idDictionary[] = { R.id.addScore,
+//									R.id.addAssist,
+//									R.id.addTurn,
+//									R.id.removeScore,
+//									R.id.removeAssist,
+//									R.id.removeTurn };
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
