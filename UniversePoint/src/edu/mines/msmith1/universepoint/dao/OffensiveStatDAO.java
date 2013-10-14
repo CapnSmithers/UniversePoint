@@ -33,13 +33,8 @@ public class OffensiveStatDAO extends BaseDAO {
 		super(context);
 
 		gameDAO = new GameDAO(context);
-		gameDAO.open();
-		
 		playerDAO = new PlayerDAO(context);
-		playerDAO.open();
-		
 		teamDAO = new TeamDAO(context);
-		teamDAO.open();
 	}
 	
 	/**
@@ -171,10 +166,19 @@ public class OffensiveStatDAO extends BaseDAO {
 	}
 	
 	@Override
+	public void open() {
+		super.open();
+		gameDAO.open();
+		playerDAO.open();
+		teamDAO.open();
+	}
+	
+	@Override
 	public void close() {
 		super.close();
 		gameDAO.close();
 		playerDAO.close();
+		teamDAO.close();
 	}
 
 }

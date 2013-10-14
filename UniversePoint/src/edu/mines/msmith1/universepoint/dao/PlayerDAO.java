@@ -25,7 +25,6 @@ public class PlayerDAO extends BaseDAO {
 	public PlayerDAO(Context context) {
 		super(context);
 		teamDAO = new TeamDAO(context);
-		teamDAO.open();
 	}
 	
 	/**
@@ -132,6 +131,12 @@ public class PlayerDAO extends BaseDAO {
 		values.put(SQLiteHelper.COLUMN_NAME, player.getName());
 		values.put(SQLiteHelper.COLUMN_TEAM_ID, player.getTeam().getId());
 		return values;
+	}
+	
+	@Override
+	public void open() {
+		super.open();
+		teamDAO.open();
 	}
 	
 	@Override
