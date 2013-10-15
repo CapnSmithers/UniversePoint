@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 import edu.mines.msmith1.universepoint.SQLiteHelper;
+import edu.mines.msmith1.universepoint.dto.BaseDTO;
 import edu.mines.msmith1.universepoint.dto.Game;
 import edu.mines.msmith1.universepoint.dto.OffensiveStat;
 import edu.mines.msmith1.universepoint.dto.Player;
@@ -123,10 +124,20 @@ public class OffensiveStatDAO extends BaseDAO {
 		return cursorToList(cursor);
 	}
 	
-	public List<OffensiveStat> getAllOffensiveStatForGame(Game game) {
+	/**
+	 * @param game
+	 * @return all offensive stats for the game
+	 */
+	public List<BaseDTO> getAllOffensiveStatForGame(Game game) {
+		List<BaseDTO> offensiveStats = new ArrayList<BaseDTO>();
 		String[] whereArgs = {String.valueOf(game.getId())};
 		Cursor cursor = db.query(SQLiteHelper.TABLE_OFFENSIVE_STAT, columns, "game_id = ?", whereArgs, null, null, null);
-		return cursorToList(cursor);
+		cursor.moveToFirst();
+		while(!cursor.isAfterLast()) {
+			offensiveStats.add(cursorToOffensiveStat(cursor));
+			cursor.moveToNext();
+		}
+		return offensiveStats;
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package edu.mines.msmith1.universepoint.dto;
 
+import android.content.Context;
+
 /**
  * Base class for DTO objects. Subclasses are required to implement toString() to reduce
  * {@link View} complexity.

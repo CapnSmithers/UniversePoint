@@ -1,5 +1,8 @@
 package edu.mines.msmith1.universepoint.dto;
 
+import android.content.res.Resources;
+import edu.mines.msmith1.universepoint.R;
+
 /**
  * POJO representation of offensive_stat table. Implicitly represents a
  * single point.
@@ -52,8 +55,18 @@ public class OffensiveStat extends BaseDTO {
 
 	@Override
 	public String toString() {
-		// TODO I don't think we will use this.
-		return null;
+		StringBuilder sb = new StringBuilder();
+		Resources resources = Resources.getSystem();
+		if (getPlayer() != null) {
+			sb.append(getPlayer().getName() + resources.getString(R.string.scoredAPoint));
+		}
+		if (getAssistingPlayer() != null) {
+			sb.append(getAssistingPlayer().getName() + resources.getString(R.string.assisted));
+		}
+		if (getTurnoverPlayer() != null) {
+			sb.append(getTurnoverPlayer().getName() + resources.getString(R.string.turnover));
+		}
+		return sb.toString();
 	}
 
 }

@@ -53,4 +53,10 @@
     <string name="noGames">No games here. Use the New Game button on the Main menu to start a new game.</string>
     <string name="title_activity_edit_games">Edit Games</string>
     <string name="title_activity_edit_game">Edit Game</string>
+    <string name="noOffensiveStats">No stats for this game! Consider removing by long clicking the game on the previous screen.</string>
+    <string name="scoredAPoint"> scored a point. </string>
+    <string name="assisted"> made an assist. </string>
+    <string name="turnover"> had a turnover. </string>
+    <string name="removeOffensiveStat">Delete Stat</string>
+    <string name="removeOffensiveStatMsg">Are you sure you want to delete this stat?</string>
 </resources>
