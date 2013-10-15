@@ -117,10 +117,24 @@ public class OffensiveStatDAO extends BaseDAO {
 	 * @return
 	 */
 	private List<OffensiveStat> getAllOffensiveStatForPlayer(Player player, String whereClause) {
-		List<OffensiveStat> offensiveStats = new ArrayList<OffensiveStat>();
 		String[] whereArgs = {String.valueOf(player.getId())};
 		Cursor cursor = db.query(SQLiteHelper.TABLE_OFFENSIVE_STAT, columns, whereClause,
 				whereArgs, null, null, null);
+		return cursorToList(cursor);
+	}
+	
+	public List<OffensiveStat> getAllOffensiveStatForGame(Game game) {
+		String[] whereArgs = {String.valueOf(game.getId())};
+		Cursor cursor = db.query(SQLiteHelper.TABLE_OFFENSIVE_STAT, columns, "game_id = ?", whereArgs, null, null, null);
+		return cursorToList(cursor);
+	}
+
+	/**
+	 * @param cursor to be examined
+	 * @return a non-null {@link List} of {@link OffensiveStat}
+	 */
+	private List<OffensiveStat> cursorToList(Cursor cursor) {
+		List<OffensiveStat> offensiveStats = new ArrayList<OffensiveStat>();
 		cursor.moveToFirst();
 		while(!cursor.isAfterLast()) {
 			offensiveStats.add(cursorToOffensiveStat(cursor));
@@ -136,17 +150,20 @@ public class OffensiveStatDAO extends BaseDAO {
 	 * @return List of OffensiveStat for the team and game
 	 */
 	public List<OffensiveStat> getOffensiveStatsForTeam(Team team, Game game) {
-		List<OffensiveStat> offensiveStats = new ArrayList<OffensiveStat>();
 		String[] whereArgs = {String.valueOf(team.getId()), String.valueOf(game.getId())};
 		Cursor cursor = db.query(SQLiteHelper.TABLE_OFFENSIVE_STAT, columns, "team_id = ? AND game_id = ?",
 				whereArgs, null, null, null);
-		cursor.moveToFirst();
-		while(!cursor.isAfterLast()) {
-			offensiveStats.add(cursorToOffensiveStat(cursor));
-			cursor.moveToNext();
-		}
-		cursor.close();
-		return offensiveStats;
+		return cursorToList(cursor);
+	}
+	
+	/**
+	 * Deletes all the {@link OffensiveStat}s for the associated game
+	 * @param game
+	 */
+	public void deleteOffensiveStatsForGame(Game game) {
+		String[] whereArgs = {String.valueOf(game.getId())};
+		Log.d(LOG_TAG, "deleting offensive_stat for game " + game.getId());
+		db.delete(SQLiteHelper.TABLE_OFFENSIVE_STAT, "game_id = ?", whereArgs);
 	}
 	
 	/**

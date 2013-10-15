@@ -43,6 +43,14 @@
             android:name="edu.mines.msmith1.universepoint.PlayerView"
             android:label="@string/title_activity_player_view" >
         </activity>
+        <activity
+            android:name="edu.mines.msmith1.universepoint.EditGames"
+            android:label="@string/title_activity_edit_games" >
+        </activity>
+        <activity
+            android:name="edut.mines.msmith1.universepoint.EditGame"
+            android:label="@string/title_activity_edit_game" >
+        </activity>
     </application>
 
 </manifest>
