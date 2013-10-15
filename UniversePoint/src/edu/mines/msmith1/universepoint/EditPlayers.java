@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import edu.mines.msmith1.universepoint.dao.OffensiveStatDAO;
 import edu.mines.msmith1.universepoint.dao.PlayerDAO;
 import edu.mines.msmith1.universepoint.dao.TeamDAO;
 import edu.mines.msmith1.universepoint.dto.BaseDTO;
@@ -27,10 +26,7 @@ import edu.mines.msmith1.universepoint.dto.Team;
 
 public class EditPlayers extends ListActivity {
 	public static final int ADD_PLAYER_ID = 1;
-	public static final String EXTRA_PLAYER_POINTS = "edu.mines.msmith1.universepoint.PLAYER_POINTS";
-	public static final String EXTRA_PLAYER_ASSISTS = "edu.mines.msmith1.universepoint.PLAYER_ASSISTS";
-	public static final String EXTRA_PLAYER_TURNOVERS = "edu.mines.msmith1.universepoint.PLAYER_TURNOVERS";
-	public static final String EXTRA_PLAYER_NAME = "edu.mines.msmith1.universepoint.PLAYER_NAME";
+	public static final String EXTRA_PLAYER_ID = "edu.mines.msmith1.universepoint.PLAYER_ID";
 	
 	private Team mTeam;
 	private BaseDTOArrayAdapter mPlayerAdapter;
@@ -113,14 +109,8 @@ public class EditPlayers extends ListActivity {
 	 * @param player
 	 */
 	private void beginPlayerViewActivity(Player player) {
-		OffensiveStatDAO offensiveStatDAO = new OffensiveStatDAO(this);
-		offensiveStatDAO.open();
 		Intent intent = new Intent(this, PlayerView.class);
-		intent.putExtra(EXTRA_PLAYER_NAME, player.getName());
-		intent.putExtra(EXTRA_PLAYER_POINTS, offensiveStatDAO.getAllPointsForPlayer(player).size());
-		intent.putExtra(EXTRA_PLAYER_ASSISTS, offensiveStatDAO.getAllAssistsForPlayer(player).size());
-		intent.putExtra(EXTRA_PLAYER_TURNOVERS, offensiveStatDAO.getAllTurnoversForPlayer(player).size());
-		offensiveStatDAO.close();
+		intent.putExtra(EXTRA_PLAYER_ID, player.getId());
 		startActivity(intent);
 	}
 	

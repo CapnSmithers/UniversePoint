@@ -7,8 +7,13 @@
  */
 package edu.mines.msmith1.universepoint;
 
+import java.util.List;
+
+import edu.mines.msmith1.universepoint.dao.PlayerDAO;
+import edu.mines.msmith1.universepoint.dto.BaseDTO;
 import android.app.Activity;
 import android.app.ListFragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,15 +42,17 @@ public class PlayerListFragment extends ListFragment {
 		 }
 	 }
 	 
-	 @Override
-	 public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		 return inflater.inflate(R.layout.player_list, container, false);
-		 
-	 }
+	  @Override
+	  public void onActivityCreated(Bundle savedInstanceState) {
+	    
+	  }
 	 
 	 //Send info back to GameRunner class
 	 @Override
 	 public void onListItemClick(ListView l, View v, int position, long id) {
 		 playerSelectedListener.listItemSelected(position);
 	 }
+		
 }
+
+
