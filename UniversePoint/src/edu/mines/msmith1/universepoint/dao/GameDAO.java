@@ -1,11 +1,16 @@
 package edu.mines.msmith1.universepoint.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 import edu.mines.msmith1.universepoint.SQLiteHelper;
+import edu.mines.msmith1.universepoint.dto.BaseDTO;
 import edu.mines.msmith1.universepoint.dto.Game;
+import edu.mines.msmith1.universepoint.dto.Team;
 
 /**
  * DAO for {@link Game} table. Eager fetches {@link Team} objects.
@@ -65,6 +70,20 @@ public class GameDAO extends BaseDAO {
 		Game game = cursorToGame(cursor);
 		cursor.close();
 		return game;
+	}
+	
+	/**
+	 * @return all entries in game table
+	 */
+	public List<BaseDTO> getGames() {
+		List<BaseDTO> games = new ArrayList<BaseDTO>();
+		Cursor cursor = db.query(SQLiteHelper.TABLE_GAME, columns, null, null, null, null, null);
+		cursor.moveToFirst();
+		while(!cursor.isAfterLast()) {
+			games.add(cursorToGame(cursor));
+			cursor.moveToNext();
+		}
+		return games;
 	}
 	
 	/**

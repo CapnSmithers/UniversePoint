@@ -27,7 +27,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 import edu.mines.msmith1.universepoint.dao.TeamDAO;
 import edu.mines.msmith1.universepoint.dto.BaseDTO;
 import edu.mines.msmith1.universepoint.dto.BaseDTOArrayAdapter;
@@ -118,14 +117,11 @@ public class MainActivity extends Activity {
 	 * Called when the view/edit games button is pressed. Navigates
 	 * user to ViewGames class screen
 	 * 
-	 * TODO: implement ViewGames class
-	 * 
 	 * @param view - edit/view games button
 	 */
 	public void viewGames(View view) {
-		// TODO
-		Toast toast = Toast.makeText(this, R.string.noNotYet, Toast.LENGTH_SHORT);
-		toast.show();
+		Intent intent = new Intent(this, EditGames.class);
+		startActivity(intent);
 	}
 
 }
