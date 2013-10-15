@@ -138,7 +138,7 @@ public class OffensiveStatDAO extends BaseDAO {
 	public List<OffensiveStat> getOffensiveStatsForTeam(Team team, Game game) {
 		List<OffensiveStat> offensiveStats = new ArrayList<OffensiveStat>();
 		String[] whereArgs = {String.valueOf(team.getId()), String.valueOf(game.getId())};
-		Cursor cursor = db.query(SQLiteHelper.TABLE_OFFENSIVE_STAT, columns, "game_id = ? AND team_id = ?",
+		Cursor cursor = db.query(SQLiteHelper.TABLE_OFFENSIVE_STAT, columns, "team_id = ? AND game_id = ?",
 				whereArgs, null, null, null);
 		cursor.moveToFirst();
 		while(!cursor.isAfterLast()) {

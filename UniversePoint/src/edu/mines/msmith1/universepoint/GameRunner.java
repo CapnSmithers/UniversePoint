@@ -10,6 +10,9 @@
 
 package edu.mines.msmith1.universepoint;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -17,24 +20,65 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
+import edu.mines.msmith1.universepoint.dao.GameDAO;
+import edu.mines.msmith1.universepoint.dao.OffensiveStatDAO;
+import edu.mines.msmith1.universepoint.dao.TeamDAO;
+import edu.mines.msmith1.universepoint.dto.Game;
+import edu.mines.msmith1.universepoint.dto.OffensiveStat;
+import edu.mines.msmith1.universepoint.dto.Team;
 
 public class GameRunner extends Activity implements PlayerListFragment.ListItemSelectedListener {
 
 	public final static int FINISH_GAME_ID = 1;
 	
+	private Game mGame; // persists immediately if the teams are not null
+	private Team mTeam1, mTeam2;
+	private List<OffensiveStat> mOffensiveStats; // onPause persist
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scorekeeping);
 		
-		//Grab team id
+		TeamDAO teamDAO = new TeamDAO(this);
+		teamDAO.open();
+		
+		// Team 1
 		Intent intent = getIntent();
-		Long teamId = intent.getLongExtra(EditTeams.EXTRA_TEAM_ID, 0);
+		Long teamId = intent.getLongExtra(MainActivity.EXTRA_TEAM_1_ID, 0);
+		mTeam1 = teamDAO.getTeamById(teamId);
 		
-		//Set Team 1 name based on id
+		// Team 2
+		Long team2Id = intent.getLongExtra(MainActivity.EXTRA_TEAM_2_ID, 0);
+		mTeam2 = teamDAO.getTeamById(team2Id);
 		
+		teamDAO.close();
+		
+		// if either team is null, show toast and finish
+		if (mTeam1 == null || mTeam2 == null) {
+			Toast toast = Toast.makeText(this, R.string.gameTeamError, Toast.LENGTH_LONG);
+			toast.show();
+			finish();
+		} else {
+			Game game = new Game();
+			game.setTeam1(mTeam1);
+			game.setTeam2(mTeam2);
+			
+			GameDAO gameDAO = new GameDAO(this);
+			gameDAO.open();
+			mGame = gameDAO.createGame(game);
+			gameDAO.close();
+			
+			mOffensiveStats = new ArrayList<OffensiveStat>();
+			
+			TextView team1TV = (TextView) findViewById(R.id.team1Name);
+			team1TV.setText(mTeam1.toString());
+			
+			TextView team2TV = (TextView) findViewById(R.id.team2Name);
+			team2TV.setText(mTeam2.toString());
+		}
 		
 		//Inflate player list fragment
 		if(findViewById(R.id.listContainer) != null) {
@@ -88,15 +132,17 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 		super.onResume();
 	}
 	
-	
 	/**
 	 * Method to take the user to the summary screen.  Accessed by pressing
 	 * the finish game button in the settings menu.
 	 */
 	private void finishGame() {
-		// TODO Auto-generated method stub
-		Toast toast = Toast.makeText(this, R.string.noNotYet, Toast.LENGTH_SHORT);
-		toast.show();
+		OffensiveStatDAO offensiveStatDAO = new OffensiveStatDAO(this);
+		offensiveStatDAO.open();
+		offensiveStatDAO.createOffensiveStats(mOffensiveStats);
+		offensiveStatDAO.close();
+		
+		finish();
 	}
 	
 	// Swaps fragments

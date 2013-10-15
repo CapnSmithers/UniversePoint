@@ -45,6 +45,8 @@
     <string name="addNewPlayer">New Player</string>
     <string name="playerName">Player Name</string>
     <string name="title_activity_player_view">Player View</string>
-    <string name="teamSelect">Select Team</string>
+    <string name="team1Select">Select Your Team</string>
+    <string name="team2Select">Select the Opposing Team</string>
+    <string name="gameTeamError">Something went wrong setting up the game. Did you select two teams?</string>
 
 </resources>
