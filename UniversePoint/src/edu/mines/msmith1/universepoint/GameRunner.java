@@ -16,6 +16,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -24,7 +25,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import edu.mines.msmith1.universepoint.dao.GameDAO;
 import edu.mines.msmith1.universepoint.dao.OffensiveStatDAO;
+import edu.mines.msmith1.universepoint.dao.PlayerDAO;
 import edu.mines.msmith1.universepoint.dao.TeamDAO;
+import edu.mines.msmith1.universepoint.dto.BaseDTO;
+import edu.mines.msmith1.universepoint.dto.BaseDTOArrayAdapter;
 import edu.mines.msmith1.universepoint.dto.Game;
 import edu.mines.msmith1.universepoint.dto.OffensiveStat;
 import edu.mines.msmith1.universepoint.dto.Team;
@@ -36,12 +40,15 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 	private Game mGame; // persists immediately if the teams are not null
 	private Team mTeam1, mTeam2;
 	private List<OffensiveStat> mOffensiveStats; // onPause persist
+	private PlayerDAO mPlayerDAO;
+	private BaseDTOArrayAdapter mPlayerAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scorekeeping);
 		
+		mPlayerDAO = new PlayerDAO(this);
 		TeamDAO teamDAO = new TeamDAO(this);
 		teamDAO.open();
 		
@@ -84,9 +91,14 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 				return;
 			}
 			
+			mPlayerDAO.open();
+			List<BaseDTO> players = new AllPlayersAsyncTask().doInBackground(mPlayerDAO);
+			
+			mPlayerAdapter = new BaseDTOArrayAdapter(this, R.layout.list_row, players);
+			
 			PlayerListFragment playerList = new PlayerListFragment();
-			playerList.setArguments(getIntent().getExtras());       // TODO: populate player list with database entries for
-																	// given team
+			playerList.setListAdapter(mPlayerAdapter);
+			
 			getFragmentManager().beginTransaction()
 				.add(R.id.listContainer, (Fragment)playerList).commit();
 		}
@@ -149,6 +161,18 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 		// TODO Swap out player list fragment with player stats fragment
 		
 		
+	}
+	
+	/**
+	 * Retrieves all players asynchronously
+	 * @param params expects {@link PlayerDAO} as first param
+	 */
+	private class AllPlayersAsyncTask extends AsyncTask<PlayerDAO, Object, List<BaseDTO>> {
+		@Override
+		protected List<BaseDTO> doInBackground(PlayerDAO... params) {
+			PlayerDAO playerDAO = params[0];
+			return playerDAO.getPlayersByTeam(mTeam1);
+		}
 	}
 	
 }
