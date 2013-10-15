@@ -44,7 +44,8 @@ public class PlayerListFragment extends ListFragment {
 	 
 	  @Override
 	  public void onActivityCreated(Bundle savedInstanceState) {
-	    
+		  super.onActivityCreated(savedInstanceState);
+		  
 	  }
 	 
 	 //Send info back to GameRunner class
