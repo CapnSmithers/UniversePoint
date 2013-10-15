@@ -32,13 +32,15 @@
 		    android:id="@+id/addPoint"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:text="@string/addButton" />
+		    android:text="@string/addButton"
+		    android:onClick="addStat" />
 
 		<Button
 		    android:id="@+id/removePoint"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:text="@string/removeButton" />
+		    android:text="@string/removeButton"
+		    android:onClick="removeStat" />
 
 	</LinearLayout>
 
@@ -64,13 +66,15 @@
 		    android:id="@+id/addAssist"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:text="@string/addButton" />
+		    android:text="@string/addButton"
+		    android:onClick="addStat" />
 
 		<Button
 		    android:id="@+id/removeAssist"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:text="@string/removeButton" />
+		    android:text="@string/removeButton"
+		    android:onClick="removeStat" />
 
 	</LinearLayout>
 
@@ -96,13 +100,15 @@
 		    android:id="@+id/addTurn"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:text="@string/addButton" />
+		    android:text="@string/addButton"
+		    android:onClick="addStat" />
 
 		<Button
 		    android:id="@+id/removeTurn"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:text="@string/removeButton" />
+		    android:text="@string/removeButton"
+		    android:onClick="removeStat" />
 
 	</LinearLayout>
 

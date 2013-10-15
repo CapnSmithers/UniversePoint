@@ -11,16 +11,21 @@
 package edu.mines.msmith1.universepoint;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.mines.msmith1.universepoint.dao.GameDAO;
@@ -31,9 +36,11 @@ import edu.mines.msmith1.universepoint.dto.BaseDTO;
 import edu.mines.msmith1.universepoint.dto.BaseDTOArrayAdapter;
 import edu.mines.msmith1.universepoint.dto.Game;
 import edu.mines.msmith1.universepoint.dto.OffensiveStat;
+import edu.mines.msmith1.universepoint.dto.Player;
 import edu.mines.msmith1.universepoint.dto.Team;
 
-public class GameRunner extends Activity implements PlayerListFragment.ListItemSelectedListener {
+public class GameRunner extends Activity implements PlayerListFragment.ListItemSelectedListener, 
+ 								PlayerStatsFragment.OffensiveStatListener {
 
 	public final static int FINISH_GAME_ID = 1;
 	
@@ -42,6 +49,9 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 	private List<OffensiveStat> mOffensiveStats; // onPause persist
 	private PlayerDAO mPlayerDAO;
 	private BaseDTOArrayAdapter mPlayerAdapter;
+	FragmentManager fragManager;
+	private HashMap<Player, HashMap<String, Integer>> playerStats;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,16 +101,30 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 				return;
 			}
 			
+			fragManager = getFragmentManager();
+			
 			mPlayerDAO.open();
 			List<BaseDTO> players = new AllPlayersAsyncTask().doInBackground(mPlayerDAO);
+			
+			//Initialize player stats map here
+			playerStats = new HashMap<Player, HashMap<String, Integer>>();
+			for(int i = 0; i < players.size(); i++) {
+				//Initialize stats map
+				HashMap<String, Integer> statsMap = new HashMap<String, Integer>();
+				statsMap.put("Scores", 0);
+				statsMap.put("Assists", 0);
+				statsMap.put("Turns", 0);
+				
+				playerStats.put((Player) players.get(i), statsMap);
+			}
 			
 			mPlayerAdapter = new BaseDTOArrayAdapter(this, R.layout.list_row, players);
 			
 			PlayerListFragment playerList = new PlayerListFragment();
 			playerList.setListAdapter(mPlayerAdapter);
 			
-			getFragmentManager().beginTransaction()
-				.add(R.id.listContainer, (Fragment)playerList).commit();
+			fragManager.beginTransaction()
+				.add(R.id.listContainer, (Fragment) playerList).commit();
 		}
 	}		
 
@@ -155,12 +179,67 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 		finish();
 	}
 	
-	// Swaps fragments
+	// Swaps fragments based on player selected from playerList fragment
 	@Override
 	public void listItemSelected(int position) {
-		// TODO Swap out player list fragment with player stats fragment
+		Player player = (Player) mPlayerAdapter.getItem(position);
 		
+		fragManager = getFragmentManager();
 		
+		Fragment playerView = new PlayerStatsFragment();
+		// Function to populate playerView here
+		
+		FragmentTransaction transaction = fragManager.beginTransaction();
+		transaction.replace(R.id.listContainer, playerView);
+		transaction.addToBackStack(null);
+		transaction.commit();
+		
+	}
+	
+	//Add button hit on PlayerStatsFragment
+	@Override
+	public void offensiveStatAdded(Player player, View button) {
+		// Add value to 'playerStats' map here, update score display
+		switch(button.getId()) {
+			case R.id.addPoint:
+				Integer scores = playerStats.get(player).get("Scores");
+				scores += 1;
+				playerStats.get(player).put("Scores", scores);
+			case R.id.addAssist:
+				Integer assists = playerStats.get(player).get("Assists");
+				assists += 1;
+				playerStats.get(player).put("Assists", assists);
+			case R.id.addTurn:
+				Integer turns = playerStats.get(player).get("Turns");
+				turns += 1;
+				playerStats.get(player).put("Turns", turns);
+			default:
+				Toast toast = Toast.makeText(this, R.string.uhoh, Toast.LENGTH_SHORT);
+				toast.show();
+		}
+	}
+
+	//Remove button hit on PlayerStatsFragment
+	@Override
+	public void offensiveStatRemoved(Player player, View button) {
+		// Remove value from 'playerStats' map here, update score display
+		switch(button.getId()) {
+			case R.id.removePoint:
+				Integer scores = playerStats.get(player).get("Scores");
+				scores -= 1;
+				playerStats.get(player).put("Scores", scores);
+			case R.id.removeAssist:
+				Integer assists = playerStats.get(player).get("Assists");
+				assists -= 1;
+				playerStats.get(player).put("Assists", assists);
+			case R.id.removeTurn:
+				Integer turns = playerStats.get(player).get("Turns");
+				turns -= 1;
+				playerStats.get(player).put("Turns", turns);
+			default:
+				Toast toast = Toast.makeText(this, R.string.uhoh, Toast.LENGTH_SHORT);
+				toast.show();
+		}
 	}
 	
 	/**

@@ -48,5 +48,6 @@
     <string name="team1Select">Select Your Team</string>
     <string name="team2Select">Select the Opposing Team</string>
     <string name="gameTeamError">Something went wrong setting up the game. Did you select two teams?</string>
+    <string name="uhoh">Something went wrong</string>
 
 </resources>

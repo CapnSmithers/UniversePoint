@@ -43,6 +43,18 @@
 	            	android:textSize="@dimen/scoreSize"
 	            	android:gravity="center"
 	            	android:text="@string/team1Score" />
+	          
+                <Button android:id="@+id/team1AddScore"
+                    android:layout_weight="0.5"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:text="@string/addButton" />
+                
+                <Button android:id="@+id/team1RemoveScore"
+                    android:layout_weight="0.5"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:text="@string/removeButton" />
 	            
 	        </LinearLayout>	        
 	    </LinearLayout>
@@ -85,7 +97,18 @@
 	            	android:gravity="center"
 	            	android:textSize="@dimen/scoreSize"
 	            	android:text="@string/team2Score" />
-	         
+	            
+	           <Button android:id="@+id/team2AddScore"
+                    android:layout_weight="0.5"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:text="@string/addButton" />
+                
+                <Button android:id="@+id/team2RemoveScore"
+                    android:layout_weight="0.5"
+                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:text="@string/removeButton" />
 	        </LinearLayout>	
 	                
 	    </LinearLayout>
