@@ -22,9 +22,4 @@ public class ScoreDisplayFragment extends Fragment {
         return inflater.inflate(R.layout.score_layout, container, false);
 
 	}
-	
-	public void updateScore() {
-		// Increment or decrement score accordingly
-	}
-	
 }

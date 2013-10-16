@@ -1,7 +1,5 @@
 package edu.mines.msmith1.universepoint.dto;
 
-import android.content.res.Resources;
-import edu.mines.msmith1.universepoint.R;
 
 /**
  * POJO representation of offensive_stat table. Implicitly represents a
@@ -54,17 +52,19 @@ public class OffensiveStat extends BaseDTO {
 	}
 
 	@Override
-	public String toString() {
+	public String toString() { // we had to use string literals because using the Resources.getSystem().getString() was throwing null pointer exceptions.
 		StringBuilder sb = new StringBuilder();
-		Resources resources = Resources.getSystem();
 		if (getPlayer() != null) {
-			sb.append(getPlayer().getName() + resources.getString(R.string.scoredAPoint));
+			sb.append(getPlayer().getName() + " scored a point.");
 		}
 		if (getAssistingPlayer() != null) {
-			sb.append(getAssistingPlayer().getName() + resources.getString(R.string.assisted));
+			sb.append(getAssistingPlayer().getName() + " made an assist.");
 		}
 		if (getTurnoverPlayer() != null) {
-			sb.append(getTurnoverPlayer().getName() + resources.getString(R.string.turnover));
+			sb.append(getTurnoverPlayer().getName() + " had a turnover.");
+		}
+		if (sb.toString().length() == 0) {
+			sb.append(team.getName() + " scored a point.");
 		}
 		return sb.toString();
 	}

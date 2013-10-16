@@ -48,7 +48,12 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 	private Team mTeam1, mTeam2;
 	private List<OffensiveStat> mOffensiveStats; // onPause persist
 	private PlayerDAO mPlayerDAO;
+	private OffensiveStatDAO mOffensiveStatDAO;
 	private BaseDTOArrayAdapter mPlayerAdapter;
+	private PlayerStatsFragment mPlayerStatsFragment;
+	
+	private int team1AnonymousScore, team2AnonymousScore = 0;
+	
 	FragmentManager fragManager;
 	private HashMap<Player, HashMap<String, Integer>> playerStats;
 	
@@ -59,6 +64,7 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 		setContentView(R.layout.activity_scorekeeping);
 		
 		mPlayerDAO = new PlayerDAO(this);
+		mOffensiveStatDAO = new OffensiveStatDAO(this);
 		TeamDAO teamDAO = new TeamDAO(this);
 		teamDAO.open();
 		
@@ -140,7 +146,7 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
 			case FINISH_GAME_ID:
-				finishGame();
+				finish();
 				return true;
 			default:
 				return false;
@@ -159,11 +165,22 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 		super.onPause();
 		Log.d("ON_PAUSE", "onPause called");
 
+		mOffensiveStatDAO.close();
+		mPlayerDAO.close();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
+		mOffensiveStatDAO.open();
+		mPlayerDAO.open();
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		finishGame();
 	}
 	
 	/**
@@ -171,12 +188,72 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 	 * the finish game button in the settings menu.
 	 */
 	private void finishGame() {
+		convertMapToOffensiveStats();
+		convertAnonymousScoresToOffensiveStats();
+		
 		OffensiveStatDAO offensiveStatDAO = new OffensiveStatDAO(this);
 		offensiveStatDAO.open();
 		offensiveStatDAO.createOffensiveStats(mOffensiveStats);
 		offensiveStatDAO.close();
-		
-		finish();
+	}
+	
+	/**
+	 * Converts our int values into database objects without a player association
+	 */
+	private void convertAnonymousScoresToOffensiveStats() {
+		for (int i = 0; i < team1AnonymousScore; i++) {
+			createOffensiveStatForTeam1(null, false, false, false);
+		}
+		for (int i = 0; i < team2AnonymousScore; i++) {
+			OffensiveStat os = new OffensiveStat();
+			os.setTeam(mTeam2);
+			os.setGame(mGame);
+			mOffensiveStats.add(os);
+		}
+	}
+	
+	/**
+	 * Converts our temporary map into database objects
+	 */
+	private void convertMapToOffensiveStats() {
+		for (Player player : playerStats.keySet()) {
+			Map<String, Integer> stats = playerStats.get(player);
+			if (stats.get("Scores").compareTo(0) > 0) {
+				for (int i = 0; stats.get("Scores").compareTo(i) > 0; i++) {
+					createOffensiveStatForTeam1(player, true, false, false);
+				}
+			}
+			if (stats.get("Assists").compareTo(0) > 0) {
+				for (int i = 0; stats.get("Assists").compareTo(i) > 0; i++) {
+					createOffensiveStatForTeam1(player, false, true, false);
+				}
+			}
+			if (stats.get("Turns").compareTo(0) > 0) {
+				for (int i = 0; stats.get("Turns").compareTo(i) > 0; i++) {
+					createOffensiveStatForTeam1(player, false, false, true);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Creates {@link OffensiveStat} database objects for team 1
+	 * @param player
+	 * @param point
+	 * @param assist
+	 * @param turnover
+	 */
+	private void createOffensiveStatForTeam1(Player player, boolean point, boolean assist, boolean turnover) {
+		OffensiveStat stat = new OffensiveStat();
+		stat.setGame(mGame);
+		stat.setTeam(mTeam1);
+		if (point)
+			stat.setPlayer(player);
+		if (assist)
+			stat.setAssistingPlayer(player);
+		if (turnover)
+			stat.setTurnoverPlayer(player);
+		mOffensiveStats.add(stat);
 	}
 	
 	// Swaps fragments based on player selected from playerList fragment
@@ -186,60 +263,138 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 		
 		fragManager = getFragmentManager();
 		
-		Fragment playerView = new PlayerStatsFragment();
-		// Function to populate playerView here
-		
+		mPlayerStatsFragment = new PlayerStatsFragment();
+		mPlayerStatsFragment.setPlayer(player);
+
 		FragmentTransaction transaction = fragManager.beginTransaction();
-		transaction.replace(R.id.listContainer, playerView);
+		transaction.replace(R.id.listContainer, mPlayerStatsFragment);
 		transaction.addToBackStack(null);
 		transaction.commit();
-		
 	}
 	
 	//Add button hit on PlayerStatsFragment
 	@Override
-	public void offensiveStatAdded(Player player, View button) {
+	public void offensiveStatAdded(View button) {
+		Player player = mPlayerStatsFragment.getPlayer();
 		// Add value to 'playerStats' map here, update score display
 		switch(button.getId()) {
 			case R.id.addPoint:
 				Integer scores = playerStats.get(player).get("Scores");
 				scores += 1;
 				playerStats.get(player).put("Scores", scores);
+				break;
 			case R.id.addAssist:
 				Integer assists = playerStats.get(player).get("Assists");
 				assists += 1;
 				playerStats.get(player).put("Assists", assists);
+				break;
 			case R.id.addTurn:
 				Integer turns = playerStats.get(player).get("Turns");
 				turns += 1;
 				playerStats.get(player).put("Turns", turns);
+				break;
 			default:
 				Toast toast = Toast.makeText(this, R.string.uhoh, Toast.LENGTH_SHORT);
 				toast.show();
 		}
+		updatePlayerStatsFragment();
+		updateScoreDisplayFragment();
 	}
 
 	//Remove button hit on PlayerStatsFragment
 	@Override
-	public void offensiveStatRemoved(Player player, View button) {
+	public void offensiveStatRemoved(View button) {
+		Player player = mPlayerStatsFragment.getPlayer();
 		// Remove value from 'playerStats' map here, update score display
 		switch(button.getId()) {
 			case R.id.removePoint:
 				Integer scores = playerStats.get(player).get("Scores");
 				scores -= 1;
 				playerStats.get(player).put("Scores", scores);
+				break;
 			case R.id.removeAssist:
 				Integer assists = playerStats.get(player).get("Assists");
 				assists -= 1;
 				playerStats.get(player).put("Assists", assists);
+				break;
 			case R.id.removeTurn:
 				Integer turns = playerStats.get(player).get("Turns");
 				turns -= 1;
 				playerStats.get(player).put("Turns", turns);
+				break;
 			default:
 				Toast toast = Toast.makeText(this, R.string.uhoh, Toast.LENGTH_SHORT);
 				toast.show();
 		}
+		updatePlayerStatsFragment();
+		updateScoreDisplayFragment();
+	}
+	
+	public void teamPointAdded(View button) {
+		switch(button.getId()) {
+			case R.id.team1AddScore:
+				team1AnonymousScore++;
+				break;
+			case R.id.team2AddScore:
+				team2AnonymousScore++;
+				break;
+			default:
+				Toast toast = Toast.makeText(this, R.string.uhoh, Toast.LENGTH_SHORT);
+				toast.show();
+		}
+		updateScoreDisplayFragment();
+	}
+	
+	public void teamPointRemoved(View button) {
+		switch(button.getId()) {
+			case R.id.team1RemoveScore:
+				team1AnonymousScore--;
+				if (team1AnonymousScore < 0)
+					team1AnonymousScore = 0;
+				break;
+			case R.id.team2RemoveScore:
+				team2AnonymousScore--;
+				if (team2AnonymousScore < 0)
+					team2AnonymousScore = 0;
+				break;
+			default:
+				Toast toast = Toast.makeText(this, R.string.uhoh, Toast.LENGTH_SHORT);
+				toast.show();
+		}
+		updateScoreDisplayFragment();
+	}
+	
+	/**
+	 * Refreshes the player stats fragment counters
+	 */
+	public void updatePlayerStatsFragment() {
+		Player player = mPlayerStatsFragment.getPlayer();
+		
+		TextView pointCountTV = (TextView) findViewById(R.id.pointCount);
+		pointCountTV.setText(playerStats.get(player).get("Scores").toString());
+		
+		TextView assistCountTV = (TextView) findViewById(R.id.assistCount);
+		assistCountTV.setText(playerStats.get(player).get("Assists").toString());
+		
+		TextView turnoverCountTV = (TextView) findViewById(R.id.turnCount);
+		turnoverCountTV.setText(playerStats.get(player).get("Turns").toString());
+	}
+	
+	/**
+	 * Refreshes the score display
+	 */
+	public void updateScoreDisplayFragment() {
+		int scoreTeam1 = 0;
+		for (Player player : playerStats.keySet()) {
+			Map<String, Integer> stats = playerStats.get(player);
+			scoreTeam1 += stats.get("Scores");
+		}
+		scoreTeam1 += team1AnonymousScore;
+		TextView team1ScoreTV = (TextView) findViewById(R.id.team1Score);
+		team1ScoreTV.setText(String.valueOf(scoreTeam1));
+		
+		TextView team2ScoreTV = (TextView) findViewById(R.id.team2Score);
+		team2ScoreTV.setText(String.valueOf(team2AnonymousScore));
 	}
 	
 	/**

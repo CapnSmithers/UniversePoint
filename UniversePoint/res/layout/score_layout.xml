@@ -48,13 +48,15 @@
                     android:layout_weight="0.5"
                     android:layout_height="match_parent"
                     android:layout_width="0dp"
-                    android:text="@string/addButton" />
+                    android:text="@string/addButton"
+                    android:onClick="teamPointAdded"/>
                 
                 <Button android:id="@+id/team1RemoveScore"
                     android:layout_weight="0.5"
                     android:layout_height="match_parent"
                     android:layout_width="0dp"
-                    android:text="@string/removeButton" />
+                    android:text="@string/removeButton"
+                    android:onClick="teamPointRemoved" />
 	            
 	        </LinearLayout>	        
 	    </LinearLayout>
@@ -102,13 +104,15 @@
                     android:layout_weight="0.5"
                     android:layout_height="match_parent"
                     android:layout_width="0dp"
-                    android:text="@string/addButton" />
+                    android:text="@string/addButton" 
+                    android:onClick="teamPointAdded" />
                 
                 <Button android:id="@+id/team2RemoveScore"
                     android:layout_weight="0.5"
                     android:layout_height="match_parent"
                     android:layout_width="0dp"
-                    android:text="@string/removeButton" />
+                    android:text="@string/removeButton"
+                    android:onClick="teamPointRemoved" />
 	        </LinearLayout>	
 	                
 	    </LinearLayout>
