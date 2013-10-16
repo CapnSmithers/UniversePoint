@@ -36,10 +36,18 @@ public class PlayerStatsFragment extends Fragment {
 		((GameRunner) getActivity()).updatePlayerStatsFragment();
 	}
 	
+	/**
+	 * Used to specify which player we're referencing
+	 * @param player
+	 */
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
 	
+	/**
+	 * Returns the player to update stats for
+	 * @return
+	 */
 	public Player getPlayer() {
 		return this.player;
 	}

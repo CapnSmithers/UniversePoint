@@ -62,8 +62,6 @@ public class OffensiveStatDAO extends BaseDAO {
 		return getOffensiveStatById(id);
 	}
 	
-	// TODO updateOffensiveStat
-	
 	/**
 	 * @param offensiveStat to be removed from database
 	 */

@@ -331,6 +331,10 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 		updateScoreDisplayFragment();
 	}
 	
+	/**
+	 * Adds a point to the appropriate team
+	 * @param button
+	 */
 	public void teamPointAdded(View button) {
 		switch(button.getId()) {
 			case R.id.team1AddScore:
@@ -346,6 +350,10 @@ public class GameRunner extends Activity implements PlayerListFragment.ListItemS
 		updateScoreDisplayFragment();
 	}
 	
+	/**
+	 * Remvoes a point from the appropriate team, does not allow the counter to go below 0
+	 * @param button
+	 */
 	public void teamPointRemoved(View button) {
 		switch(button.getId()) {
 			case R.id.team1RemoveScore:

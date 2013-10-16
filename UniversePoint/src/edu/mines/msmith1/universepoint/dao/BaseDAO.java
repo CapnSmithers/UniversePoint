@@ -20,10 +20,17 @@ public abstract class BaseDAO {
 		dbHelper = new SQLiteHelper(context);
 	}
 	
+	/**
+	 * Opens a connection to the database
+	 * @throws SQLException
+	 */
 	public void open() throws SQLException {
 		db = dbHelper.getWritableDatabase();
 	}
 	
+	/**
+	 * Closes the database connection
+	 */
 	public void close() {
 		dbHelper.close();
 	}
