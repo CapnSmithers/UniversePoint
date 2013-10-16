@@ -1,10 +1,3 @@
-/**
- * Description: Persistent fragment to display the score 
- * of current game in GamerRunner. 
- * 
- * @author Matt Smith, Van Rice
- *
- */
 package edu.mines.msmith1.universepoint;
 
 import android.app.Fragment;
@@ -13,6 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * Description: Persistent {@link Fragment} to display the score 
+ * of current game in {@link GameRunner}. 
+ * 
+ * @author Matt Smith, Van Rice
+ *
+ */
 public class ScoreDisplayFragment extends Fragment {
 	
 	@Override 

@@ -1,9 +1,17 @@
 package edu.mines.msmith1.universepoint;
 
+import edu.mines.msmith1.universepoint.dto.OffensiveStat;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+/**
+ * {@link Activity} to display {@link OffensiveStat}s for given 
+ * {@link Player}.  Displays lifetime stats.
+ * 
+ * @author Matt Smith, Van Rice
+ *
+ */
 public class PlayerView extends Activity {
 
 	@Override
