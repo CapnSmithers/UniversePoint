@@ -7,22 +7,14 @@
  */
 package edu.mines.msmith1.universepoint;
 
-import java.util.List;
-
-import edu.mines.msmith1.universepoint.dao.PlayerDAO;
-import edu.mines.msmith1.universepoint.dto.BaseDTO;
 import android.app.Activity;
 import android.app.ListFragment;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 
 public class PlayerListFragment extends ListFragment {
 	ListItemSelectedListener playerSelectedListener;
-	
 	
 	/**
 	 * Interface to allow list item selection
@@ -55,5 +47,3 @@ public class PlayerListFragment extends ListFragment {
 	 }
 		
 }
-
-
