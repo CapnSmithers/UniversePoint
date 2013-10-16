@@ -1,12 +1,3 @@
-/**
- * Description: This class is a list of the teams listed in the database.
- * Clicking on a team will take you to a list of all of the players on that
- * team.  The list of teams can be edited to add or remove teams by using the
- * settings menu to add a team and long-pressing a team name to remove it.  
- * 
- * @author Matt Smith, Van Rice
- *
- */
 package edu.mines.msmith1.universepoint;
 
 import java.util.List;
@@ -29,6 +20,16 @@ import edu.mines.msmith1.universepoint.dao.TeamDAO;
 import edu.mines.msmith1.universepoint.dto.BaseDTO;
 import edu.mines.msmith1.universepoint.dto.BaseDTOArrayAdapter;
 import edu.mines.msmith1.universepoint.dto.Team;
+
+/**
+ * Description: This class is a {@link ListView} of the {@link Team} objects listed in the database.
+ * Clicking on a team will take you to a list of all of the players on that
+ * team.  The list of teams can be edited to add or remove teams by using the
+ * settings menu to add a team and long-pressing a team name to remove it.  
+ * 
+ * @author Matt Smith, Van Rice
+ *
+ */
 
 public class EditTeams extends ListActivity {
 	public static final int ADD_TEAM_ID = 1;

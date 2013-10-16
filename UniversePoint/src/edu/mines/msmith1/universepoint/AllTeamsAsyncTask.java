@@ -5,10 +5,11 @@ import java.util.List;
 import android.os.AsyncTask;
 import edu.mines.msmith1.universepoint.dao.TeamDAO;
 import edu.mines.msmith1.universepoint.dto.BaseDTO;
-	
+
 /**
- * Retrieves all teams asynchronously
- * @author vanxrice
+ * Description: Retrieves all teams asynchronously
+ * 
+ * @author Van Rice, Matt Smith
  */
 public class AllTeamsAsyncTask extends AsyncTask<TeamDAO, Object, List<BaseDTO>> {
 	@Override

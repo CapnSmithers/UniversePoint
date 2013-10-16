@@ -25,6 +25,14 @@ import edu.mines.msmith1.universepoint.dto.BaseDTOArrayAdapter;
 import edu.mines.msmith1.universepoint.dto.Player;
 import edu.mines.msmith1.universepoint.dto.Team;
 
+/**
+ * {@link ListView} for {@link Player} objects in a {@link Team}. Clicking on
+ * a team in the team list will take you to this screen, which displays all 
+ * players on that team, allowing for adding or removing players. 
+ * 
+ * @author Matt Smith, Van Rice
+ *
+ */
 public class EditPlayers extends ListActivity {
 	public static final int ADD_PLAYER_ID = 1;
 	public static final String EXTRA_PLAYER_POINTS = "edu.mines.msmith1.universepoint.PLAYER_POINTS";

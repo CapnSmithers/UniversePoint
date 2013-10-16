@@ -1,21 +1,3 @@
-/**
- * Description: Main menu for Universe Point app.  Provides 
- *   navigation to score-keeping screen, edit/view team screen,
- *   and edit/view game screen. Currently only new game and edit/view
- *   team buttons are functional. More options will be implemented in 
- *   future releases. 
- *   
- * Usage: Used Nexus 4 emulator and Nexus 7 tablet to test.  Target API is 18,
- * minimum API is 11.  
- * 
- * Documentation Statement: According to the Academic Honesty Policy outlined in the 
- *   course syllabus, we have been the sole authors and debuggers of this piece of 
- *   software. The only resources that I have used are developer.android.com, class 
- *   notes, and internet resources such as stackoverflow.com for troubleshooting purposes.
- *   No code has been copied or stolen.
- * 
- * @author Matthew Smith, Vander Rice
- */
 package edu.mines.msmith1.universepoint;
 
 import java.util.List;
@@ -31,6 +13,23 @@ import edu.mines.msmith1.universepoint.dao.TeamDAO;
 import edu.mines.msmith1.universepoint.dto.BaseDTO;
 import edu.mines.msmith1.universepoint.dto.BaseDTOArrayAdapter;
 
+/**
+ * Main menu for application. Provides navigation to {@link EditTeams} and {@link EditGames}
+ * as well as {@link GameRunner} via new game button.  
+ *   
+ * Usage: Used Nexus 4 and HTC One phones to test.  Target API is 18,
+ * minimum API is 11.  
+ * 
+ * Documentation Statement: According to the Academic Honesty Policy outlined in the 
+ *   course syllabus, we have been the sole authors and debuggers of this piece of 
+ *   software. The only resources that I have used are developer.android.com, class 
+ *   notes, and internet resources such as stackoverflow.com for troubleshooting purposes.
+ *   No code has been copied or stolen.
+ *   
+ * Work/Grade Breakdown: 50/50 split for work and point distribution
+ * 
+ * @author Matthew Smith, Vander Rice
+ */
 public class MainActivity extends Activity {
 	public static final String EXTRA_TEAM_1_ID = "edu.mines.msmith1.universepoint.TEAM_1_ID";
 	public static final String EXTRA_TEAM_2_ID = "edu.mines.msmith1.universepoint.TEAM_2_ID";

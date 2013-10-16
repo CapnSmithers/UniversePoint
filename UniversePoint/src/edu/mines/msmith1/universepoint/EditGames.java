@@ -19,6 +19,13 @@ import edu.mines.msmith1.universepoint.dto.BaseDTOArrayAdapter;
 import edu.mines.msmith1.universepoint.dto.Game;
 import edu.mines.msmith1.universepoint.dto.OffensiveStat;
 
+/**
+ * {@link ListView} for {@link Game} objects.  Displays a list of all
+ * game objects currently in database.
+ * 
+ * @author Van Rice, Matt Smith
+ *
+ */
 public class EditGames extends ListActivity {
 	public static final String EXTRA_GAME_ID = "edu.mines.msmith1.universepoint.GAME_ID";
 	private BaseDTOArrayAdapter mGameAdapter;

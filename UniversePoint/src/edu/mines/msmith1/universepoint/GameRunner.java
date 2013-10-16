@@ -1,13 +1,3 @@
-/**
- * Description: This class is the functionality behind the score-keeping screen.
- *   Displays two fragments - one persistent fragment that shows the score for both teams,
- *   and one dynamic fragment that switches between a list of players on team 1 and a screen
- *   that displays current statistics on a selected player stored in the database.  This 
- *   screen allows entry of stats and updates the score screen accordingly.  
- * 
- * @author Matt Smith, Van Rice
- */
-
 package edu.mines.msmith1.universepoint;
 
 import java.util.ArrayList;
@@ -38,6 +28,17 @@ import edu.mines.msmith1.universepoint.dto.Game;
 import edu.mines.msmith1.universepoint.dto.OffensiveStat;
 import edu.mines.msmith1.universepoint.dto.Player;
 import edu.mines.msmith1.universepoint.dto.Team;
+
+/**
+ *  This class is the main activity behind the scorekeeping mechanic
+ *  of the app.  Displays a {@link ScoreDisplayFragment} to show the current
+ *  game score, and swaps between {@link PlayerListFragment} and {@link PlayerStatsFragment}  
+ *  to add {@link OffensiveStat} objects to each player and game.  Selecting Finish game from
+ *  the options menu will save the {@link Game} to the database and take the user to the main 
+ *  menu.
+ * 
+ * @author Matt Smith, Van Rice
+ */
 
 public class GameRunner extends Activity implements PlayerListFragment.ListItemSelectedListener, 
  								PlayerStatsFragment.OffensiveStatListener {

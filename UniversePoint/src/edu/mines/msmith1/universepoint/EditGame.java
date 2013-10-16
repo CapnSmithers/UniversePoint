@@ -19,6 +19,14 @@ import edu.mines.msmith1.universepoint.dto.BaseDTOArrayAdapter;
 import edu.mines.msmith1.universepoint.dto.Game;
 import edu.mines.msmith1.universepoint.dto.OffensiveStat;
 
+/**
+ * Description: Class to display {@link Game} items after being saved.
+ * Displays breakdown of points and other {@link OffensiveStat} objects
+ * that occured during the game. 
+ * 
+ * @author Matt Smith, Van Rice
+ *
+ */
 public class EditGame extends ListActivity {
 	private BaseDTOArrayAdapter mOffensiveStatsAdapter;
 	private OffensiveStatDAO mOffensiveStatDAO;
